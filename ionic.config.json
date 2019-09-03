@@ -1,5 +1,7 @@
 {
   "name": "cosmosurge-revised",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

@@ -1,0 +1,12 @@
+<div>
+  <div class="title">{{ photo.createdAt }}</div>
+  <div class="photo" [class.selected]="selected">
+      <ion-button color="secondary" class="image-button-left" *ngIf="selected">
+          <ion-icon slot="icon-only" name="checkbox-outline"></ion-icon>
+      </ion-button>
+      <ion-button *ngIf="!withoutButtons" (click)="deletePhoto()"class="image-button">
+          <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    <img (click)="selectPhoto()" [src]="photo.content">
+  </div>
+</div>

@@ -1,0 +1,8 @@
+<ion-card>
+  <ion-card-header>
+    {{treatment?.label}}-{{treatment?.date}} <ion-icon name="create" (click)="editEvent(treatment)"></ion-icon>
+  </ion-card-header>
+  <ion-card-content>
+    <kryptand-patient-image-container [patientId]="patientId" [treatmentId]="treatment.id"></kryptand-patient-image-container>
+  </ion-card-content>
+</ion-card>

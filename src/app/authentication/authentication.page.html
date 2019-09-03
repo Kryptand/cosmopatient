@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>authentication</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  
+<ion-item>
+   <ion-label position="fixed">Passwort</ion-label>
+    <ion-input required formControlName="passwordCtrl"></ion-input>
+    <div *ngIf="!passwordCtrl.valid">Das angegebene Passwort ist nicht korrekt.</div>
+  </ion-item>
+ <ion-button (click)="loginButtonTriggered()" expand="block">Login</ion-button>
+</ion-content>

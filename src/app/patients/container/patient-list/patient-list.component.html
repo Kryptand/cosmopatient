@@ -1,0 +1,31 @@
+<ion-searchbar
+  [formControl]="searchControl"
+  placeholder="Patienten suchen"
+  debounce="500"
+></ion-searchbar>
+<ion-list>
+  <!-- Sliding item with text options on both sides -->
+  <ng-container *ngFor="let patient of filteredPatients$ | async">
+    <ion-item-sliding>
+      <ion-item [routerLink]="['/tabs/patients/treatments', patient.id]">
+        <ion-label>{{ patient.firstName }}-{{ patient.lastName }}</ion-label>
+      </ion-item>
+      <ion-item-options side="start">
+        <ion-item-option (click)="edit(patient)" color="secondary" expandable>
+          Bearbeiten<ion-icon name="create"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+      <ion-item-options side="end">
+        <ion-item-option (click)="delete(patient.id)" color="danger" expandable>
+          Löschen<ion-icon name="trash"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ng-container>
+</ion-list>
+
+<ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="create()">
+  <ion-fab-button color="primary"
+    ><ion-icon name="add"></ion-icon
+  ></ion-fab-button>
+</ion-fab>

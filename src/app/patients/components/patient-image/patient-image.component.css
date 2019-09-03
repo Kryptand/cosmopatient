@@ -1,0 +1,12 @@
+.photo{
+    position: relative;
+}
+.image-button{
+    position: absolute;
+    right:0px;
+}
+.image-button-left{
+    position: absolute;
+    left:0px;
+
+}
