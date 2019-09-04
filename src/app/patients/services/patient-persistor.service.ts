@@ -4,21 +4,24 @@ import { Patient } from "../models/patient";
 import { from, Observable } from "rxjs";
 import * as uuid from "uuid";
 import { isNullOrUndefined } from 'util';
+import { PhotoPersistor } from './patient-photo-persistor.service';
+import { TreatmentPersistor } from './patient-treatment-persistor.service';
 
 const PATIENTS_STORAGE_KEY = "[PATIENTS]";
 
 @Injectable()
 export class PatientPersistor {
-  constructor(private storage: Storage) {}
+  constructor(private storage: Storage,private treatmentPersistor:TreatmentPersistor) {
+  }
   save(patient: Patient): Observable<any> {
     const id = uuid.v4();
-    console.debug(id);
     patient.id = id;
     return from(
       this.storage.set(`${PATIENTS_STORAGE_KEY}${patient.id}`, patient)
     );
   }
   update(patient: Patient): Observable<any> {
+  
     return from(
       this.storage.set(`${PATIENTS_STORAGE_KEY}${patient.id}`, patient)
     );
@@ -45,6 +48,8 @@ export class PatientPersistor {
     );
   }
   remove(id: string): Observable<any> {
+    this.treatmentPersistor.removeForPatient(id);
     return from(this.storage.remove(`${PATIENTS_STORAGE_KEY}${id}`));
   }
+
 }

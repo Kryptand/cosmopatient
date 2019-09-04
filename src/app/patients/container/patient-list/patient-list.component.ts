@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter } from "@angular/core";
+import { Component, OnInit, Input, EventEmitter, ChangeDetectionStrategy } from "@angular/core";
 import { BehaviorSubject, Observable, combineLatest } from "rxjs";
 import { switchMap, map, startWith } from "rxjs/operators";
 import { PatientPersistor } from "./../../services/patient-persistor.service";
@@ -10,7 +10,8 @@ import { FormControl } from "@angular/forms";
 @Component({
   selector: "kryptand-patient-list",
   templateUrl: "./patient-list.component.html",
-  styleUrls: ["./patient-list.component.css"]
+  styleUrls: ["./patient-list.component.css"],
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class PatientListComponent implements OnInit {
   @Input()

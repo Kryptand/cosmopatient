@@ -49,7 +49,9 @@ export class PatientImageGalleryComponent implements OnInit {
       });
     }
   }
-
+  delete(treatment:Treatment){
+    this.treatmentPersistor.remove(this.patientId,treatment.id).subscribe(_ => this.refresh$.next(undefined));
+  }
   edit(treatment: Treatment) {
     this.openOverlay(treatment);
   }

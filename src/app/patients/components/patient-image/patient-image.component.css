@@ -1,12 +1,25 @@
-.photo{
-    position: relative;
+.photo {
+  position: relative;
 }
-.image-button{
-    position: absolute;
-    right:0px;
+.image-button {
+  position: absolute;
+  right: 0px;
 }
-.image-button-left{
-    position: absolute;
-    left:0px;
-
+.image-button-left {
+  position: absolute;
+  left: 0px;
+}
+.title {
+  position: absolute;
+  bottom: 0px;
+  z-index: 2;
+  width: 100%;
+  background: #000000c4;
+  font-size: 20px;
+  text-align: end;
+  padding-right: 24px;
+  color: white;
+}
+.image {
+  position: relative;
 }

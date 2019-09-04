@@ -1,5 +1,5 @@
-<div>
-  <div class="title">{{ photo.createdAt }}</div>
+<div class="image">
+  <div class="title">{{formattedDateString }}</div>
   <div class="photo" [class.selected]="selected">
       <ion-button color="secondary" class="image-button-left" *ngIf="selected">
           <ion-icon slot="icon-only" name="checkbox-outline"></ion-icon>

@@ -1,6 +1,12 @@
 <ion-card>
   <ion-card-header>
-    {{treatment?.label}}-{{treatment?.date}} <ion-icon name="create" (click)="editEvent(treatment)"></ion-icon>
+    {{treatment?.label}}-{{treatment?.date}}
+    <ion-button (click)="editEvent(treatment)"  color="secondary">
+      <ion-icon slot="icon-only" name="create"></ion-icon>
+  </ion-button>
+  <ion-button (click)="deleteEvent(treatment)" color="danger">
+    <ion-icon slot="icon-only"   name="trash"></ion-icon>
+</ion-button>
   </ion-card-header>
   <ion-card-content>
     <kryptand-patient-image-container [patientId]="patientId" [treatmentId]="treatment.id"></kryptand-patient-image-container>

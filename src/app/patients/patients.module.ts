@@ -21,6 +21,7 @@ import { PatientTreatmentComponent } from "./components/patient-treatment/patien
 import { PatientAddEditTreatmentContainerComponent } from "./container/patient-add-edit-treatment-container/patient-add-edit-treatment-container.component";
 import { NullOrUndefinedPipe } from './pipes/null-or-undefined.pipe';
 import { Camera } from '@ionic-native/camera/ngx';
+import { ImportExportService } from './services/export-import.service';
 
 const PATIENT_COMPONENTS = [
   PatientListComponent,
@@ -48,7 +49,7 @@ const PATIENT_COMPONENTS = [
       { path: "treatments/:id", component: PatientImageGalleryComponent }
     ])
   ],
-  providers: [PatientPersistor, TreatmentPersistor, PhotoPersistor,Camera],
+  providers: [PatientPersistor, TreatmentPersistor, PhotoPersistor,Camera,ImportExportService],
   declarations: [PatientsPage, ...PATIENT_COMPONENTS],
   entryComponents: [
     PatientAddEditComponent,

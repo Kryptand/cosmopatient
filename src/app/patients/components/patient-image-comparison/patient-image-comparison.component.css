@@ -1,4 +1,17 @@
+.image-container {
+  display: flex;
+  width: 100%;
+}
+.first-image {
+  flex: 50%;
+  display:flex;
+  align-items: center;
+}
+.second-image {
+  flex: 50%;
+  display:flex;
+  align-items: center;
+}
 .image-container{
-    display:flex;
-    width:100%;
+    max-height:100vh;
 }

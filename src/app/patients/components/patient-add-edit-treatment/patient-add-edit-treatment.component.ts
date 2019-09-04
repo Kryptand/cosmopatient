@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from "@angular/core";
 import { FormGroup, FormControl } from "@angular/forms";
 import { isNullOrUndefined } from "util";
 import { Treatment } from "../../models/treatment";
@@ -6,7 +6,8 @@ import { Treatment } from "../../models/treatment";
 @Component({
   selector: "kryptand-patient-add-edit-treatment",
   templateUrl: "./patient-add-edit-treatment.component.html",
-  styleUrls: ["./patient-add-edit-treatment.component.css"]
+  styleUrls: ["./patient-add-edit-treatment.component.css"],
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class PatientAddEditTreatmentComponent implements OnInit {
   @Input() treatment: Treatment;

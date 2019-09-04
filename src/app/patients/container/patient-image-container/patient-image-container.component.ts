@@ -121,15 +121,18 @@ export class PatientImageContainerComponent implements OnInit {
   isPhotoIncluded(photo:Photo):boolean{
     return this.selectedPhotos.some(x=>x.id===photo.id);
   }
-  async selectPhoto(photo:Photo){    
+   selectPhoto(photo:Photo){
+
     if(this.isPhotoIncluded(photo)){
-    return this.selectedPhotos=this.selectedPhotos.filter(x=>x.id!==photo.id);
-    }
-    if(this.selectedPhotos.length===2){
-      this.presentToastWithOptions();
-    }
+     this.selectedPhotos=this.selectedPhotos.filter(x=>x.id!==photo.id);   
+     return  this.cd.markForCheck();
+    }    
     if(this.selectedPhotos.length<2){
-    return this.selectedPhotos=[...this.selectedPhotos,photo]
+     this.selectedPhotos=[...this.selectedPhotos,photo];
+     if(this.selectedPhotos.length===2){
+      this.presentToastWithOptions();
+    }    
+        return this.cd.markForCheck();
     }
     this.selectedPhotos.shift();
     this.selectedPhotos=[...this.selectedPhotos,photo];
@@ -154,7 +157,7 @@ export class PatientImageContainerComponent implements OnInit {
       buttons: [
         {
           icon: 'star',
-          text: 'Fortschritt ansehen',
+          text: 'Vergleichen',
           handler: () => {
             this.openOverlay();
           }

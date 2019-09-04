@@ -1,11 +1,12 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnInit, ChangeDetectionStrategy } from "@angular/core";
 import { NavParams, PopoverController } from "@ionic/angular";
 import { Treatment } from "../../models/treatment";
 
 @Component({
   selector: "kryptand-patient-add-edit-treatment-container",
   templateUrl: "./patient-add-edit-treatment-container.component.html",
-  styleUrls: ["./patient-add-edit-treatment-container.component.css"]
+  styleUrls: ["./patient-add-edit-treatment-container.component.css"],
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class PatientAddEditTreatmentContainerComponent implements OnInit {
   @Input() treatment: Treatment;
