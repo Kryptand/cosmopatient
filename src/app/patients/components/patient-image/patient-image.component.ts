@@ -1,5 +1,12 @@
-import { Component, OnInit, Input, Output, EventEmitter,ChangeDetectionStrategy } from "@angular/core";
-import { Treatment, Photo } from "./../../models/treatment";
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  ChangeDetectionStrategy
+} from "@angular/core";
+import { Photo } from './../../models/treatment';
 import { isNullOrUndefined } from "util";
 
 @Component({
@@ -27,10 +34,8 @@ export class PatientImageComponent implements OnInit {
   }
   ngOnInit() {
     if (!isNullOrUndefined(this.photo.createdAt)) {
-      const createdAt=+this.photo.createdAt;
-      this.formattedDateString = new Date(
-        createdAt
-      ).toLocaleDateString();
+      const createdAt = +this.photo.createdAt;
+      this.formattedDateString = new Date(createdAt).toLocaleDateString();
     }
   }
 }
