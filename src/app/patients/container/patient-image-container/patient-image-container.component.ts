@@ -11,7 +11,6 @@ import { Camera, CameraOptions } from "@ionic-native/camera/ngx";
 import {
   Platform,
   ToastController,
-  PopoverController,
   ModalController
 } from "@ionic/angular";
 import { BehaviorSubject, Observable, of } from "rxjs";
@@ -182,9 +181,6 @@ export class PatientImageContainerComponent implements OnInit {
       ]
     });
     toast.present();
-  }
-  create() {
-    this.openOverlay();
   }
   async openOverlay() {
     const modal = await this.modalController.create({
