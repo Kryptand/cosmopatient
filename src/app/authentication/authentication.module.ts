@@ -17,15 +17,13 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-  CommonModule,
+    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
     RouterModule.forChild(routes)
   ],
   declarations: [AuthenticationPage],
-  providers:[
-    AuthenticationService
-  ]
+  providers: [AuthenticationService]
 })
 export class AuthenticationPageModule {}

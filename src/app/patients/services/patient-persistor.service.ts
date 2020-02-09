@@ -1,13 +1,13 @@
-import { Injectable } from "@angular/core";
-import { Storage } from "@ionic/storage";
-import { Patient } from "../models/patient";
-import { from, Observable } from "rxjs";
-import * as uuid from "uuid";
-import { isNullOrUndefined } from "util";
-import { PhotoPersistor } from "./patient-photo-persistor.service";
-import { TreatmentPersistor } from "./patient-treatment-persistor.service";
+import { Injectable } from '@angular/core';
+import { Storage } from '@ionic/storage';
+import { Patient } from '../models/patient';
+import { from, Observable } from 'rxjs';
+import * as uuid from 'uuid';
+import { isNullOrUndefined } from 'util';
+import { PhotoPersistor } from './patient-photo-persistor.service';
+import { TreatmentPersistor } from './patient-treatment-persistor.service';
 
-const PATIENTS_STORAGE_KEY = "[PATIENTS]";
+const PATIENTS_STORAGE_KEY = '[PATIENTS]';
 
 @Injectable()
 export class PatientPersistor {

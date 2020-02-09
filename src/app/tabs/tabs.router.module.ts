@@ -1,31 +1,31 @@
-import { NgModule } from "@angular/core";
-import { RouterModule, Routes } from "@angular/router";
-import { TabsPage } from "./tabs.page";
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { TabsPage } from './tabs.page';
 
 const routes: Routes = [
   {
-    path: "tabs",
+    path: 'tabs',
     component: TabsPage,
     children: [
       {
-        path: "patients",
+        path: 'patients',
         children: [
           {
-            path: "",
+            path: '',
             loadChildren: () =>
-              import("../patients/patients.module").then(
+              import('../patients/patients.module').then(
                 m => m.PatientsPageModule
               )
           }
         ]
       },
       {
-        path: "configuration",
+        path: 'configuration',
         children: [
           {
-            path: "",
+            path: '',
             loadChildren: () =>
-              import("../configuration/configuration.module").then(
+              import('../configuration/configuration.module').then(
                 m => m.ConfigurationPageModule
               )
           }
@@ -33,7 +33,7 @@ const routes: Routes = [
       }
     ]
   },
-  { path: "", redirectTo: "/tabs/patients", pathMatch: "full" }
+  { path: '', redirectTo: '/tabs/patients', pathMatch: 'full' }
 ];
 
 @NgModule({

@@ -1,14 +1,38 @@
 <ion-card>
   <ion-card-header>
-    {{treatment?.label}}-{{treatment?.date}}
-    <ion-button (click)="editEvent(treatment)"  color="secondary">
-      <ion-icon slot="icon-only" name="create"></ion-icon>
-  </ion-button>
-  <ion-button (click)="deleteEvent(treatment)" color="danger">
-    <ion-icon slot="icon-only"   name="trash"></ion-icon>
-</ion-button>
+    <ion-card-title>
+      <div class="treatment__header treatment__header--flex">
+        {{ treatment?.label }}
+        <span class="spacer"></span>
+        <div>
+          <ion-button
+            shape="round"
+            size="small"
+            (click)="editEvent(treatment)"
+            color="primary"
+          >
+            <ion-icon slot="icon-only" name="create"></ion-icon>
+          </ion-button>
+          <ion-button
+            shape="round"
+            size="small"
+            (click)="deleteEvent(treatment)"
+            color="danger"
+          >
+            <ion-icon slot="icon-only" name="trash"></ion-icon>
+          </ion-button>
+        </div>
+      </div>
+    </ion-card-title>
+
+    <ion-card-subtitle> {{ treatment?.date }}</ion-card-subtitle>
+    <ion-card-subtitle> </ion-card-subtitle>
   </ion-card-header>
+
   <ion-card-content>
-    <kryptand-patient-image-container [patientId]="patientId" [treatmentId]="treatment.id"></kryptand-patient-image-container>
+    <kryptand-patient-image-container
+      [patientId]="patientId"
+      [treatmentId]="treatment.id"
+    ></kryptand-patient-image-container>
   </ion-card-content>
 </ion-card>

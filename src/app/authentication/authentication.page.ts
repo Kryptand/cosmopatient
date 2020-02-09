@@ -1,11 +1,11 @@
-import { Component, OnInit } from "@angular/core";
-import { FormControl } from "@angular/forms";
-import { AuthenticationService } from "./authentication.service";
+import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { AuthenticationService } from './authentication.service';
 
 @Component({
-  selector: "kryptand-authentication",
-  templateUrl: "./authentication.page.html",
-  styleUrls: ["./authentication.page.scss"]
+  selector: 'kryptand-authentication',
+  templateUrl: './authentication.page.html',
+  styleUrls: ['./authentication.page.scss']
 })
 export class AuthenticationPage implements OnInit {
   passwordCtrl: FormControl = new FormControl();

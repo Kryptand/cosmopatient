@@ -1,12 +1,8 @@
-import { Injectable } from "@angular/core";
-import { Photo } from "../models/treatment";
-import { BehaviorSubject } from "rxjs";
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import {Photo} from '../models/photo';
 
 @Injectable()
 export class PhotoSelector {
   selectedPhotos$: BehaviorSubject<Photo[]> = new BehaviorSubject([]);
-
-  public selectPhotos(photos: Photo[]) {
-    this.selectedPhotos$.next(photos);
-  }
 }

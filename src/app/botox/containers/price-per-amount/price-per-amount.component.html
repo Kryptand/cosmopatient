@@ -1,0 +1,23 @@
+<ion-card>
+  <ion-card-header>
+    Preis pro Einheit
+  </ion-card-header>
+  <ion-card-content>
+    <ion-item>
+      <ion-input
+        autofocus
+        [autofocusFixAsync]="true"
+        [autofocusFixSmartEmptyCheck]="true"
+        [autofocusFixTriggerDetectChanges]="true"
+        type="text"
+        [formControl]="pricePerAmountField"
+      ></ion-input>
+    </ion-item>
+    <ion-button
+      color="primary"
+      expand="block"
+      (click)="save()"
+      >Speichern</ion-button
+    >
+  </ion-card-content>
+</ion-card>

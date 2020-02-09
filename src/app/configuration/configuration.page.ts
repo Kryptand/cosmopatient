@@ -7,10 +7,9 @@ import { ImportExportService } from '../patients/services/export-import.service'
   styleUrls: ['configuration.page.scss']
 })
 export class ConfigurationPage {
-
-  constructor(private importExport:ImportExportService) {}
-  export(){
+  constructor(private importExport: ImportExportService) {}
+  export() {
     this.importExport.exportToCsv();
   }
-  import(){}
+  import() {}
 }

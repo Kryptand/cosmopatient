@@ -1,29 +1,28 @@
 <ion-header>
-    <ion-toolbar>
-        <ion-buttons slot="start">
-            <ion-back-button defaultHref="tabs/patients"></ion-back-button>
-          </ion-buttons>      
-      <ion-title>
-        Patienten
-      </ion-title>
-    </ion-toolbar>
-  </ion-header>
-  
-  <ion-content>
-      <ion-list>
-          <ng-container *ngFor="let treatment of treatments$ | async">
-            <kryptand-patient-treatment
-              [patientId]="patientId"
-              [treatment]="treatment"
-              (editEventTriggered)="edit($event)"
-              (deleteEventTriggered)="delete($event)"
-            ></kryptand-patient-treatment>
-          </ng-container>
-        </ion-list>  
-        <ion-fab vertical="bottom" horizontal="end" (click)="create()">
-            <ion-fab-button color="primary"
-              ><ion-icon name="add"></ion-icon
-            ></ion-fab-button>
-          </ion-fab>
-  </ion-content>
-  
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="tabs/patients"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Patienten
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ng-container *ngFor="let treatment of treatments$ | async">
+      <kryptand-patient-treatment
+        [patientId]="patientId"
+        [treatment]="treatment"
+        (editEventTriggered)="edit($event)"
+        (deleteEventTriggered)="delete($event)"
+      ></kryptand-patient-treatment>
+    </ng-container>
+  </ion-list>
+  <ion-fab vertical="bottom" horizontal="end" (click)="create()">
+    <ion-fab-button color="primary"
+      ><ion-icon name="add"></ion-icon
+    ></ion-fab-button>
+  </ion-fab>
+</ion-content>

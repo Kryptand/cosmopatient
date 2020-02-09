@@ -11,9 +11,8 @@ describe('PatientImageContainerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PatientImageContainerComponent ]
-    })
-    .compileComponents();
+      declarations: [PatientImageContainerComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

@@ -15,12 +15,12 @@
     </div>
   </div>
 </ng-container>
-<div id="web-upload" *ngIf="platform.is('desktop')">
+<div id="web-upload" style="display: none;">
   <input
     type="file"
     id="upload"
     #upload
     accept="image/x-png,image/jpeg"
-    (change)="uploadImage()"
+    (change)="uploadImage(uploadElement.nativeElement.files)"
   />
 </div>

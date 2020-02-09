@@ -1,34 +1,40 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from "@angular/core";
-import { FormGroup } from "@angular/forms";
-import { FormControl } from "@angular/forms";
-import { Patient } from "../../models/patient";
-import { isNullOrUndefined } from "util";
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  ChangeDetectionStrategy
+} from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { FormControl } from '@angular/forms';
+import { Patient } from '../../models/patient';
+import { patchFormValue } from '../../../util/patch-form';
 
 @Component({
-  selector: "kryptand-patient-add-edit",
-  templateUrl: "./patient-add-edit.component.html",
-  styleUrls: ["./patient-add-edit.component.css"],
-  changeDetection:ChangeDetectionStrategy.OnPush
+  selector: 'kryptand-patient-add-edit',
+  templateUrl: './patient-add-edit.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PatientAddEditComponent implements OnInit {
   @Input() patient: Patient;
   @Output() savePatientEventTriggered: EventEmitter<
     Patient
   > = new EventEmitter();
-  patientForm: FormGroup = new FormGroup({
+
+  public patientForm: FormGroup = new FormGroup({
     firstName: new FormControl(),
     lastName: new FormControl()
   });
-  constructor() {}
 
-  ngOnInit() {
-    if (!isNullOrUndefined(this.patient)) {
-      Object.keys(this.patient).map(x =>
-        this.patientForm.controls[x].patchValue(this.patient[x])
-      );
+  public ngOnInit() {
+    if (!this.patient) {
+      return;
     }
+    patchFormValue(this.patient, this.patientForm);
   }
-  save() {
+
+  public save() {
     this.savePatientEventTriggered.emit(this.patientForm.value);
   }
 }

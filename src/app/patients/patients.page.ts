@@ -6,7 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['patients.page.scss']
 })
 export class PatientsPage {
-
   constructor() {}
-
 }

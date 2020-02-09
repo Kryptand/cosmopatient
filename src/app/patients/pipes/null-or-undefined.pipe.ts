@@ -2,13 +2,13 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { isNullOrUndefined } from 'util';
 
 @Pipe({
-    name: 'nullOrUndefined',
+  name: 'nullOrUndefined'
 })
 export class NullOrUndefinedPipe implements PipeTransform {
-    transform(items: any[]): any {
-        if(!items){
-            return;
-        }
-        return items.filter(x=>!isNullOrUndefined(x));
+  transform(items: any[]): any {
+    if (!items) {
+      return;
     }
+    return items.filter(x => !isNullOrUndefined(x));
+  }
 }

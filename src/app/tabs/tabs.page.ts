@@ -1,15 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-tabs',
+  selector: 'kryptand-tabs',
   templateUrl: 'tabs.page.html',
-  styleUrls: ['tabs.page.scss']
 })
-export class TabsPage {
-
-  constructor() {}
-  bla(){
-    alert('asd');
-  }
-
-}
+export class TabsPage {}

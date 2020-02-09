@@ -6,48 +6,47 @@ import {
   Input,
   OnInit,
   ViewChild
-} from "@angular/core";
-import { Camera, CameraOptions } from "@ionic-native/camera/ngx";
+} from '@angular/core';
+import { Camera } from '@ionic-native/camera/ngx';
+import { Platform, ToastController, ModalController } from '@ionic/angular';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+import { isNullOrUndefined } from 'util';
+import { PhotoPersistor } from '../../services/patient-photo-persistor.service';
+import { PhotoSelector } from '../../services/photo-selector.service';
 import {
-  Platform,
-  ToastController,
-  ModalController
-} from "@ionic/angular";
-import { BehaviorSubject, Observable, of } from "rxjs";
-import { switchMap } from "rxjs/operators";
-import { isNullOrUndefined } from "util";
-import { Photo } from "../../models/treatment";
-import { PhotoPersistor } from "./../../services/patient-photo-persistor.service";
-import { PatientImageComparisonComponent } from "../../components/patient-image-comparison/patient-image-comparison.component";
-import { PhotoSelector } from "../../services/photo-selector.service";
+  createPictureComparisonToast,
+  firstFileToBase64,
+  getBase64ImageFromCamera,
+  openComparisonModal
+} from '../../../util/image';
+import {Photo} from '../../models/photo';
+
 @Component({
-  selector: "kryptand-patient-image-container",
-  templateUrl: "./patient-image-container.component.html",
-  styleUrls: ["./patient-image-container.component.css"],
+  selector: 'kryptand-patient-image-container',
+  templateUrl: './patient-image-container.component.html',
+  styleUrls: ['./patient-image-container.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PatientImageContainerComponent implements OnInit {
   @Input() treatmentId: string;
   @Input() patientId: string;
-  images$: Observable<Photo>;
+  images$: Observable<Photo[]>;
   refresh$: BehaviorSubject<void> = new BehaviorSubject(undefined);
   selectedPhotos: Photo[] = [];
-  @ViewChild("upload") uploadElement: ElementRef;
+  @ViewChild('upload') uploadElement: ElementRef;
   constructor(
     private camera: Camera,
     private toastCtrl: ToastController,
     private photoPersistor: PhotoPersistor,
     private cd: ChangeDetectorRef,
     private modalController: ModalController,
-    private platform: Platform,
+    public platform: Platform,
     public photoSelector: PhotoSelector
   ) {}
 
   ngOnInit() {
-    if (
-      isNullOrUndefined(this.treatmentId) ||
-      isNullOrUndefined(this.patientId)
-    ) {
+    if (!(this.treatmentId && this.patientId)) {
       return;
     }
     this.photoSelector.selectedPhotos$.subscribe(
@@ -61,80 +60,33 @@ export class PatientImageContainerComponent implements OnInit {
         )
       )
     );
-    photos$.subscribe(values => {
-      this.images$ = of(
-        values.filter((value: any) => !isNullOrUndefined(value))
-      );
+    photos$.subscribe(photos => {
+      this.images$ = of(photos.filter((photo: any) => photo));
       this.cd.markForCheck();
     });
   }
-  uploadImage() {
-    const fileList: FileList = this.uploadElement.nativeElement.files;
-    if (fileList && fileList.length > 0) {
-      this.firstFileToBase64(fileList[0]).then(
-        (result: string) => {
-          const photo = {
-            id: "",
-            content: result,
-            fileName: "uploadedImage",
-            createdAt: Date.now().toString()
-          };
-          this.photoPersistor
-            .save(this.patientId, this.treatmentId, photo)
-            .subscribe(_ => this.refresh$.next(undefined));
-        },
-        (err: any) => {
-          console.error(err);
-        }
-      );
+  uploadImage(uploadedImages: FileList) {
+    if (!(uploadedImages && uploadedImages.length > 0)) {
+      return;
     }
-  }
-
-  private firstFileToBase64(fileImage: File): Promise<{}> {
-    return new Promise((resolve, reject) => {
-      const fileReader: FileReader = new FileReader();
-      if (fileReader && fileImage != null) {
-        fileReader.readAsDataURL(fileImage);
-        fileReader.onload = () => {
-          resolve(fileReader.result);
-        };
-
-        fileReader.onerror = error => {
-          reject(error);
-        };
-      } else {
-        reject(new Error("No file found"));
-      }
-    });
-  }
-  uploadFromCamera() {
-    if (this.platform.is("desktop")) {
-      this.uploadElement.nativeElement.click();
-    }
-    const options: CameraOptions = {
-      quality: 100,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE
-    };
-    this.camera.getPicture(options).then(
-      imageData => {
-        const base64Image = `data:image/jpeg;base64,${imageData}`;
-        const photo = {
-          id: "",
-          content: base64Image,
-          fileName: "uploadedImage",
-          createdAt: Date.now().toString()
-        };
-        this.photoPersistor
-          .save(this.patientId, this.treatmentId, photo)
-          .subscribe(_ => this.refresh$.next(undefined));
-      },
-      err => {
-        console.log(JSON.stringify(err));
-      }
+    firstFileToBase64(uploadedImages[0]).then((result: Photo) =>
+      this.photoPersistor
+        .save(this.patientId, this.treatmentId, result)
+        .subscribe(_ => this.refresh$.next(undefined))
     );
   }
+
+  uploadFromCamera() {
+    if (this.platform.is('desktop')) {
+      this.uploadElement.nativeElement.click();
+    }
+    getBase64ImageFromCamera(this.camera).then(image => {
+      this.photoPersistor
+        .save(this.patientId, this.treatmentId, image)
+        .subscribe(_ => this.refresh$.next(undefined));
+    });
+  }
+
   isPhotoIncluded(photo: Photo): boolean {
     return this.selectedPhotos.some(x => x.id === photo.id);
   }
@@ -143,14 +95,16 @@ export class PatientImageContainerComponent implements OnInit {
       this.photoSelector.selectedPhotos$.next(
         this.selectedPhotos.filter(x => x.id !== photo.id)
       );
-      return this.cd.markForCheck();
+      this.cd.markForCheck();
+      return;
     }
     if (this.selectedPhotos.length < 2) {
       this.photoSelector.selectedPhotos$.next([...this.selectedPhotos, photo]);
       if (this.selectedPhotos.length === 2) {
         this.presentToastWithOptions(this.selectedPhotos).then(r => r);
       }
-      return this.cd.markForCheck();
+      this.cd.markForCheck();
+      return;
     }
     this.selectedPhotos.shift();
     this.photoSelector.selectedPhotos$.next([...this.selectedPhotos, photo]);
@@ -158,40 +112,14 @@ export class PatientImageContainerComponent implements OnInit {
   }
 
   async presentToastWithOptions(photos: Photo[]) {
-    const toast = await this.toastCtrl.create({
-      header: "Vergleichen",
-      message: `${photos.length} Elemente selektiert`,
-      position: "bottom",
-      duration: 10000,
-      buttons: [
-        {
-          icon: "star",
-          text: "Vergleichen",
-          handler: () => {
-            this.openOverlay();
-          }
-        },
-        {
-          text: "Abbrechen",
-          role: "cancel",
-          handler: () => {
-            toast.remove();
-          }
-        }
-      ]
-    });
-    toast.present();
-  }
-  async openOverlay() {
-    const modal = await this.modalController.create({
-      component: PatientImageComparisonComponent,
-      componentProps: {
-        images: this.selectedPhotos,
-        popover: this.modalController
-      },
-      cssClass: "image-overlay"
-    });
-    await modal.present();
+    const toast = await createPictureComparisonToast(
+      photos,
+      this.toastCtrl,
+      () => {
+        openComparisonModal(photos, this.modalController);
+      }
+    );
+    await toast.present();
   }
   deletePhoto(photo: Photo) {
     if (this.isPhotoIncluded(photo)) {

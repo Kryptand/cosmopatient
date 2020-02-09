@@ -1,12 +1,12 @@
-export interface Treatment{
-    id:string;
-    photos:Photo[];
-    label:string;
-    date:Date;
-}
-export interface Photo{
-    id:string;
-    content:string;
-    fileName:string;
-    createdAt:string;
+import { Photo } from './photo';
+export type TreatmentType = 'Botox' | 'Thread' | 'Custom';
+
+export interface Treatment {
+  id: string;
+  photos: Photo[];
+  label?: string;
+  type: TreatmentType;
+  date: Date;
+  detail: any;
+  price: number;
 }

@@ -5,14 +5,13 @@ import {
   Output,
   EventEmitter,
   ChangeDetectionStrategy
-} from "@angular/core";
-import { Photo } from './../../models/treatment';
-import { isNullOrUndefined } from "util";
+} from '@angular/core';
+import {Photo} from '../../models/photo';
 
 @Component({
-  selector: "kryptand-patient-image",
-  templateUrl: "./patient-image.component.html",
-  styleUrls: ["./patient-image.component.css"],
+  selector: 'kryptand-patient-image',
+  templateUrl: './patient-image.component.html',
+  styleUrls: ['./patient-image.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PatientImageComponent implements OnInit {
@@ -21,21 +20,21 @@ export class PatientImageComponent implements OnInit {
   @Output() photoSelectEventTriggered: EventEmitter<Photo> = new EventEmitter();
   @Output() photoDeleteEventTriggered: EventEmitter<Photo> = new EventEmitter();
   @Input() selected: boolean = false;
-  formattedDateString: string;
-  constructor() {}
-  selectPhoto() {
+  public formattedDateString: string;
+  public selectPhoto() {
     this.photoSelectEventTriggered.emit(this.photo);
   }
-  deletePhoto() {
+  public deletePhoto() {
     setTimeout(() => {
       this.selected = false;
     }, 200);
     this.photoDeleteEventTriggered.emit(this.photo);
   }
-  ngOnInit() {
-    if (!isNullOrUndefined(this.photo.createdAt)) {
-      const createdAt = +this.photo.createdAt;
-      this.formattedDateString = new Date(createdAt).toLocaleDateString();
+  public ngOnInit() {
+    if (!this.photo || !this.photo.createdAt) {
+      return;
     }
+    const createdAt = +this.photo.createdAt;
+    this.formattedDateString = new Date(createdAt).toLocaleDateString();
   }
 }

@@ -1,12 +1,11 @@
-import { Platform } from "@ionic/angular";
-import { Injectable } from "@angular/core";
-import { Storage } from "@ionic/storage";
-import { BehaviorSubject } from "rxjs";
+import { Platform } from '@ionic/angular';
+import { Injectable } from '@angular/core';
+import { Storage } from '@ionic/storage';
+import { BehaviorSubject } from 'rxjs';
 
-const TOKEN_KEY = "auth-token";
-const SUPER_STRONG_PASSWORD = "passwort";
-@Injectable(
-)
+const TOKEN_KEY = 'auth-token';
+const SUPER_STRONG_PASSWORD = 'passwort';
+@Injectable()
 export class AuthenticationService {
   authenticated = new BehaviorSubject(false);
 
@@ -34,12 +33,12 @@ export class AuthenticationService {
       new Date().getTime() + 35 * 60000
     ).toLocaleDateString();
     await this.storage.set(TOKEN_KEY, date);
-      this.authenticated.next(true);
+    this.authenticated.next(true);
   }
 
   async logout() {
     await this.storage.remove(TOKEN_KEY);
-      this.authenticated.next(false);
+    this.authenticated.next(false);
   }
 
   isAuthenticated() {
