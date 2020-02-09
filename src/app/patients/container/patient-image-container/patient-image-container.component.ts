@@ -32,7 +32,7 @@ export class PatientImageContainerComponent implements OnInit {
   images$: Observable<Photo>;
   refresh$: BehaviorSubject<void> = new BehaviorSubject(undefined);
   selectedPhotos: Photo[] = [];
-  @ViewChild("upload", { static: false }) uploadElement: ElementRef;
+  @ViewChild("upload") uploadElement: ElementRef;
   constructor(
     private camera: Camera,
     private toastCtrl: ToastController,
