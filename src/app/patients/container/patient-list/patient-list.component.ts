@@ -1,17 +1,14 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  ChangeDetectionStrategy
-} from '@angular/core';
-import { BehaviorSubject, Observable, combineLatest } from 'rxjs';
-import { switchMap, map, startWith } from 'rxjs/operators';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { map, startWith, switchMap } from 'rxjs/operators';
 import { PatientPersistor } from '../../services/patient-persistor.service';
 import { Patient } from '../../models/patient';
 import { PopoverController } from '@ionic/angular';
 import { PatientAddEditContainerComponent } from '../patient-add-edit-container/patient-add-edit-container.component';
 import { isNullOrUndefined } from 'util';
 import { FormControl } from '@angular/forms';
+import { openOverlayAndEmitResult } from '../../../util/open-overlay';
+
 @Component({
   selector: 'kryptand-patient-list',
   templateUrl: './patient-list.component.html',
@@ -52,20 +49,34 @@ export class PatientListComponent implements OnInit {
     );
   }
   async openOverlay(patient?: Patient) {
-    const popover = await this.popoverController.create({
-      component: PatientAddEditContainerComponent,
-      componentProps: { patient: patient, popover: this.popoverController }
-    });
-    await popover.present();
-    const result = await popover.onDidDismiss();
-    const toSave = result.data as Patient;
-    return isNullOrUndefined(patient)
-      ? this.patientPersistor
-          .save(toSave)
-          .subscribe(_ => this.refreshPatients())
-      : this.patientPersistor
-          .update(toSave)
+    return await this.openOverlayAndEmitResult(
+      patient,
+      patient => {
+        this.patientPersistor
+          .save(patient)
           .subscribe(_ => this.refreshPatients());
+      },
+      patient => {
+        this.patientPersistor
+          .update(patient)
+          .subscribe(_ => this.refreshPatients());
+      }
+    );
+  }
+
+  private async openOverlayAndEmitResult(
+    patient: Patient,
+    saveMethod: Function,
+    updateMethod: Function
+  ) {
+    const formResult = await openOverlayAndEmitResult(
+      { patient },
+      this.popoverController,
+      PatientAddEditContainerComponent
+    );
+    return isNullOrUndefined(patient)
+      ? saveMethod(formResult)
+      : updateMethod(formResult);
   }
 
   delete(id: string) {

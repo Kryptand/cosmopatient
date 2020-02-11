@@ -13,7 +13,9 @@ import { BotoxAddEditTreatmentContainerComponent } from './containers/botox-add-
 import { Overlay } from '@angular/cdk/overlay';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
-import { BotoxPage } from './botox.page';
+import { BotoxRegionContainer } from './containers/botox-region-container/botox-region-container.component';
+import { SharedModule } from '../shared/shared.module';
+import { BotoxTypeListComponent } from './containers/type-list/botox-type-list.component';
 
 @NgModule({
   declarations: [
@@ -23,12 +25,14 @@ import { BotoxPage } from './botox.page';
     BotoxRegionAddEditComponent,
     BotoxRegionListComponent,
     BotoxPricePerAmountComponent,
-    BotoxPage
+    BotoxTypeListComponent,
+    BotoxRegionContainer
   ],
   providers: [Overlay],
   imports: [
     IonicModule,
     CommonModule,
+    SharedModule,
     MatAutocompleteModule,
     MatInputModule,
     FormsModule,

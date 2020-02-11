@@ -1,4 +1,4 @@
-<form [formGroup]="regionForm" padding-right>
+<form [formGroup]="formGroup" padding-right>
   <ion-item>
     <ion-label position="floating">Region</ion-label>
     <ion-input
@@ -27,7 +27,7 @@
   <ion-button
     color="primary"
     expand="block"
-    [disabled]="!regionForm.valid"
+    [disabled]="!formGroup.valid"
     (click)="save()"
     >Speichern</ion-button
   >

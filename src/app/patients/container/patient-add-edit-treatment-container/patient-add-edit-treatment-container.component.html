@@ -1,6 +1,21 @@
-<ion-card>
+<ion-segment (ionChange)="segmentChanged($event)">
+  <ion-segment-button checked value="botox">
+    <ion-label>Botox</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="threads">
+    <ion-label>Faden</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="custom">
+    <ion-label>Andere</ion-label>
+  </ion-segment-button>
+</ion-segment>
+<ion-card *ngIf="botoxActive">
   <kryptand-patient-add-edit-treatment
     [treatment]="treatment"
     (saveTreatmentEventTriggered)="saveTreatmentEventEmitted($event)"
   ></kryptand-patient-add-edit-treatment>
 </ion-card>
+<ion-card *ngIf="threadActive">
+  thread
+</ion-card>
+<ion-card *ngIf="customActive">custom </ion-card>

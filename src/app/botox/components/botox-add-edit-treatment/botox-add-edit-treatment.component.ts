@@ -13,11 +13,9 @@ import {
 } from '../../services/region-persistor.service';
 import { BotoxTreatment } from '../../models/botox-treatment';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
-import { AreaAutoCompleteService } from '../../services/area-autocomplete.service';
 import { patchFormValue } from '../../../util/patch-form';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { TreatmentDetail } from '../../../patients/models/treatment-detail';
 
 function mutateAmount(
   botoxTreatment: BotoxTreatment,
@@ -35,8 +33,7 @@ function mutateAmount(
   selector: 'kryptand-botox-add-edit-treatment',
   templateUrl: './botox-add-edit-treatment.component.html',
   styleUrls: ['./botox-add-edit-treatment.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [AreaAutoCompleteService]
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BotoxAddEditTreatmentComponent implements OnInit {
   @Input() botoxTreatment: BotoxTreatment;

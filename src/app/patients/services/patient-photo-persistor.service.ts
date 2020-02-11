@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { from, Observable } from 'rxjs';
 import * as uuid from 'uuid';
-import {Photo} from '../models/photo';
+import { Photo } from '../models/photo';
 const TREATMENT_STORAGE_KEY = '[PHOTO]';
 @Injectable()
 export class PhotoPersistor {

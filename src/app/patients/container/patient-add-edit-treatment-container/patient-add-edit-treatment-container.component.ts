@@ -10,7 +10,9 @@ import { Treatment } from '../../models/treatment';
 export class PatientAddEditTreatmentContainerComponent {
   @Input() treatment: Treatment;
   @Input() patientId: string;
-
+  botoxActive: boolean = true;
+  threadActive: boolean = false;
+  customActive: boolean = false;
   pop: PopoverController;
 
   saveTreatmentEventEmitted(treatment: Treatment) {
@@ -20,5 +22,14 @@ export class PatientAddEditTreatmentContainerComponent {
     this.patientId = navParams.get('patientId');
     this.treatment = navParams.get('treatment');
     this.pop = navParams.get('popover');
+  }
+
+  segmentChanged(event: CustomEvent) {
+    const {
+      detail: { value }
+    } = event;
+    this.botoxActive = value === 'botox';
+    this.threadActive = value === 'threads';
+    this.customActive = value === 'custom';
   }
 }
