@@ -1,7 +1,7 @@
 import { Storage } from '@ionic/storage';
 import { from, Observable } from 'rxjs';
 import { isNullOrUndefined } from 'util';
-
+import * as uuid from 'uuid';
 export abstract class AbstractPersistor<T> {
   constructor(
     protected storage: Storage,

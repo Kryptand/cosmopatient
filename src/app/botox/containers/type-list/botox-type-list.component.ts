@@ -9,8 +9,8 @@ import {
 
 @Component({
   selector: 'kryptand-botox-type-list',
-  templateUrl: './type-list.component.html',
-  styleUrls: ['./type-list.component.scss'],
+  templateUrl: './botox-type-list.component.html',
+  styleUrls: ['./botox-type-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BotoxTypeListComponent extends AbstractCrudContainer<BotoxType> {

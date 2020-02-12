@@ -2,9 +2,9 @@ import { BehaviorSubject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 import { AbstractPersistor } from '../util/abstract-persistor';
-import {openOverlayAndEmitResult} from '../util/open-overlay';
-import {PopoverController} from '@ionic/angular';
-import {Type} from '@angular/core';
+import { openOverlayAndEmitResult } from '../util/open-overlay';
+import { PopoverController } from '@ionic/angular';
+import { Type } from '@angular/core';
 export abstract class AbstractCrudContainer<T> {
   refresh$ = new BehaviorSubject(undefined);
   public entities$ = this.refresh$.pipe(switchMap(() => this.persistor.list()));
@@ -16,21 +16,30 @@ export abstract class AbstractCrudContainer<T> {
   create(entity: T) {
     this.persistor.save(entity).subscribe(_ => this.refreshList());
   }
-  async openOverlayWithProps(overlayProps: any, popoverController: PopoverController, component: Type<any>, currentValue?: any) {
-      const formResult = await openOverlayAndEmitResult(
-          overlayProps,
-          popoverController,
-          component
-      );
-      return this.handleOverlayResult(formResult, currentValue);
+  async openOverlayWithProps(
+    overlayProps: any,
+    popoverController: PopoverController,
+    component: Type<any>,
+    currentValue?: any
+  ) {
+    const formResult = await openOverlayAndEmitResult(
+      overlayProps,
+      popoverController,
+      component
+    );
+    return this.handleOverlayResult(formResult, currentValue);
   }
 
-  handleOverlayResult(currentValue: any, originalValue?: any){
-      if((originalValue&&currentValue)&&(JSON.stringify(originalValue)!==JSON.stringify(currentValue)){
-            this.update(currentValue);
-            return;
-      }
-      this.create(currentValue);
+  handleOverlayResult(currentValue: any, originalValue?: any) {
+    if (
+      originalValue &&
+      currentValue &&
+      JSON.stringify(originalValue) !== JSON.stringify(currentValue)
+    ) {
+      this.update(currentValue);
+      return;
+    }
+    this.create(currentValue);
   }
   update(entity: T) {
     this.persistor.update(entity).subscribe(_ => this.refreshList());

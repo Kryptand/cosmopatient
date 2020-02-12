@@ -16,6 +16,8 @@ import { MatInputModule } from '@angular/material/input';
 import { BotoxRegionContainer } from './containers/botox-region-container/botox-region-container.component';
 import { SharedModule } from '../shared/shared.module';
 import { BotoxTypeListComponent } from './containers/type-list/botox-type-list.component';
+import { BotoxAddEditTypeContainerComponent } from './containers/botox-add-edit-type-container/botox-add-edit-type-container.component';
+import { BotoxAddEditTypeComponent } from './components/botox-add-edit-type/botox-add-edit-type.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { BotoxTypeListComponent } from './containers/type-list/botox-type-list.c
     BotoxAddEditTreatmentContainerComponent,
     BotoxRegionAddEditContainerComponent,
     BotoxRegionAddEditComponent,
+    BotoxAddEditTypeContainerComponent,
+    BotoxAddEditTypeComponent,
     BotoxRegionListComponent,
     BotoxPricePerAmountComponent,
     BotoxTypeListComponent,
