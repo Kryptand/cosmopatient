@@ -1,0 +1,11 @@
+<form [formGroup]="formGroup" (ngSubmit)="save()">
+  <formly-form
+    [form]="formGroup"
+    [fields]="fields"
+    [model]="entity"
+  ></formly-form>
+  <ion-button (click)="cancel.emit()">Abbrechen</ion-button>
+  <ion-button color="primary" [disabled]="!formGroup.valid" (click)="save()"
+    >Speichern</ion-button
+  >
+</form>
