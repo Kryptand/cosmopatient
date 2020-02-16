@@ -1,0 +1,20 @@
+<kryptand-crud-container
+  title="Botox - Arten"
+  backRef="tabs/configuration"
+  [templateRef]="templateRef"
+  [persistorInstance]="botoxTypePersistor"
+  [fieldConfig]="fieldConfig"
+>
+</kryptand-crud-container>
+<ng-template #templateRef let-entity>
+  <ion-item
+    >Titel:
+    <ion-chip outline="true" color="primary">
+      <ion-label> {{ entity?.title }}</ion-label>
+    </ion-chip>
+    &nbsp; &nbsp;Preis pro Einheit:
+    <ion-chip outline="true" color="primary">
+      <ion-label> {{ entity?.pricePerUnit }}</ion-label>
+    </ion-chip>
+  </ion-item>
+</ng-template>

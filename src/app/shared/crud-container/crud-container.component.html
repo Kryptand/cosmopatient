@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button [defaultHref]="backRef"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      {{ title }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+  <kryptand-list-with-fab
+    (fabButtonPressed)="openOverlay()"
+    [entities$]="entities$"
+    [entityTemplateRef]="entity"
+  >
+  </kryptand-list-with-fab>
+  <ng-template #entity let-entity>
+    <ion-item-sliding *ngIf="entity">
+      <ng-container
+        *ngTemplateOutlet="templateRef; context: { $implicit: entity }"
+      ></ng-container>
+      <ion-item-options side="start">
+        <ion-item-option
+          (click)="openOverlay(entity)"
+          color="secondary"
+          expandable
+        >
+          Bearbeiten<ion-icon name="create"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+      <ion-item-options side="end">
+        <ion-item-option (click)="delete(entity.id)" color="danger" expandable>
+          Löschen<ion-icon name="trash"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ng-template>
+</ion-content>

@@ -1,0 +1,13 @@
+<div *ngFor="let field of field.fieldGroup; let i = index" class="row">
+  <formly-field class="col" [field]="field"></formly-field>
+  <div class="col-sm-2 d-flex align-items-center">
+    <ion-button (click)="remove(i)">
+      <ion-icon slot="icon-only" name="remove-circle-outline"></ion-icon>
+    </ion-button>
+  </div>
+</div>
+<div style="margin:30px 0;">
+  <ion-button (click)="add()">
+    <ion-icon slot="icon-only" name="add-circle-outline"></ion-icon>
+  </ion-button>
+</div>
