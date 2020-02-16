@@ -23,7 +23,9 @@ import { CosmoRoutingModule } from './cosmo-routing.module';
     CosmoRoutingModule,
     IonicStorageModule.forRoot(),
     AutofocusFixModule.forRoot(),
-    FormlyModule.forRoot(),
+    FormlyModule.forRoot({
+      validationMessages: [{ name: 'required', message: 'erforderlich' }]
+    }),
     FormlyIonicModule,
     BrowserAnimationsModule
   ],

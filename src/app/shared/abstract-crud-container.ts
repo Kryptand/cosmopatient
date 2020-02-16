@@ -4,17 +4,28 @@ import { switchMap } from 'rxjs/operators';
 import { AbstractPersistor } from '../util/abstract-persistor';
 import { openOverlayAndEmitResult } from '../util/open-overlay';
 import { PopoverController } from '@ionic/angular';
-import { Type } from '@angular/core';
+import { Input, Type } from '@angular/core';
 export abstract class AbstractCrudContainer<T> {
   refresh$ = new BehaviorSubject(undefined);
-  public entities$ = this.refresh$.pipe(switchMap(() => this.persistor.list()));
-  constructor(private persistor: AbstractPersistor<T>) {}
+  @Input() persistorInstance: AbstractPersistor<T>;
+  public entities$ = this.refresh$.pipe(
+    switchMap(() => this.persistorInstance.list())
+  );
+  constructor(private persistor?: AbstractPersistor<T>) {
+    if (persistor) {
+      this.persistorInstance = persistor;
+    }
+  }
 
   delete(key: string): void {
-    this.persistor.remove(key).subscribe(_ => this.refreshList());
+    if (key) {
+      this.persistorInstance.remove(key).subscribe(_ => this.refreshList());
+    }
   }
   create(entity: T): void {
-    this.persistor.save(entity).subscribe(_ => this.refreshList());
+    if (entity) {
+      this.persistorInstance.save(entity).subscribe(_ => this.refreshList());
+    }
   }
   async openOverlayWithProps(
     overlayProps: any,
@@ -42,7 +53,9 @@ export abstract class AbstractCrudContainer<T> {
     this.create(currentValue);
   }
   update(entity: T): void {
-    this.persistor.update(entity).subscribe(_ => this.refreshList());
+    if (entity) {
+      this.persistorInstance.update(entity).subscribe(_ => this.refreshList());
+    }
   }
   private refreshList(): void {
     this.refresh$.next(undefined);

@@ -1,5 +1,7 @@
 <kryptand-form
-        [entity]="entity"
-        (saveEntity)="saveEntityEmitted($event)"
-        [fields]="fields"
+  #formComponent
+  [entity]="entity"
+  (saveEntity)="saveEntityEmitted($event)"
+  (cancel)="pop.dismiss()"
+  [fields]="fields"
 ></kryptand-form>

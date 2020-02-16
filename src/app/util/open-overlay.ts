@@ -8,7 +8,7 @@ export const openOverlayAndEmitResult = async function(
 ) {
   const popover = await popoverController.create({
     component: component,
-    componentProps: { ...overlayProps, popover: this.popoverController }
+    componentProps: { ...overlayProps, popover: popoverController }
   });
   await popover.present();
   const result = await popover.onDidDismiss();

@@ -1,29 +1,30 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { BotoxRegionListComponent } from './containers/region-list/region-list.component';
-import { BotoxPricePerAmountComponent } from './containers/price-per-amount/price-per-amount.component';
-import { IonicModule } from '@ionic/angular';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BotoxRegionAddEditContainerComponent } from './containers/region-add-edit-container/region-add-edit-container.component';
-
 import { BotoxAddEditTreatmentComponent } from './components/botox-add-edit-treatment/botox-add-edit-treatment.component';
+import { IonicModule } from '@ionic/angular';
 import { BotoxAddEditTreatmentContainerComponent } from './containers/botox-add-edit-treatment-container/botox-add-edit-treatment-container.component';
-
-import { Overlay } from '@angular/cdk/overlay';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { BotoxPricePerAmountComponent } from './containers/price-per-amount/price-per-amount.component';
 import { MatInputModule } from '@angular/material/input';
-import { BotoxRegionContainer } from './containers/botox-region-container/botox-region-container.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BotoxTypeContainerComponent } from './containers/type/botox-type-container.component';
 import { SharedModule } from '../shared/shared.module';
-import { BotoxTypeListComponent } from './containers/type-list/botox-type-list.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { Overlay } from '@angular/cdk/overlay';
+import { BotoxRegionContainerComponent } from './containers/region/botox-region-container.component';
+import { RouterModule } from '@angular/router';
+import { FormComponentContainer } from './containers/form/form.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { BotoxFormComponent } from './components/botox-form/botox-form.component';
+
 @NgModule({
   declarations: [
     BotoxAddEditTreatmentComponent,
     BotoxAddEditTreatmentContainerComponent,
-    BotoxRegionAddEditContainerComponent,
-    BotoxRegionListComponent,
     BotoxPricePerAmountComponent,
-    BotoxTypeListComponent,
-    BotoxRegionContainer
+    BotoxTypeContainerComponent,
+    BotoxRegionContainerComponent,
+    BotoxFormComponent,
+    FormComponentContainer
   ],
   providers: [Overlay],
   imports: [
@@ -31,9 +32,15 @@ import { BotoxTypeListComponent } from './containers/type-list/botox-type-list.c
     CommonModule,
     SharedModule,
     MatAutocompleteModule,
+    MatFormFieldModule,
     MatInputModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule.forChild([
+      { path: 'regions', component: BotoxRegionContainerComponent },
+      { path: 'types', component: BotoxTypeContainerComponent },
+      { path: 'form', component: FormComponentContainer }
+    ])
   ]
 })
 export class BotoxModule {}

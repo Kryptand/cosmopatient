@@ -5,21 +5,27 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ConfigurationPage } from './configuration.page';
 import { ImportExportService } from '../patients/services/export-import.service';
+import { BotoxTypeContainerComponent } from '../botox/containers/type/botox-type-container.component';
 import { BotoxModule } from '../botox/botox.module';
-import { BotoxRegionListComponent } from '../botox/containers/region-list/region-list.component';
-import { BotoxRegionContainer } from '../botox/containers/botox-region-container/botox-region-container.component';
-import { BotoxTypeContainer } from '../botox/containers/botox-type-container/botox-type-container.component';
+import { BotoxRegionContainerComponent } from '../botox/containers/region/botox-region-container.component';
 
 @NgModule({
   imports: [
     IonicModule,
-    BotoxModule,
     CommonModule,
     FormsModule,
     RouterModule.forChild([
       { path: '', component: ConfigurationPage },
-      { path: 'botox/regions', component: BotoxRegionContainer },
-      { path: 'botox/types', component: BotoxTypeContainer }
+      {
+        path: 'botox',
+        loadChildren: () =>
+          import('./../botox/botox.module').then(m => m.BotoxModule)
+      },
+      {
+        path: 'thread',
+        loadChildren: () =>
+          import('./../thread/thread.module').then(m => m.ThreadModule)
+      }
     ])
   ],
   declarations: [ConfigurationPage],

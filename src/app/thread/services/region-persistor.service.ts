@@ -4,12 +4,13 @@ import { AbstractPersistor } from '../../util/abstract-persistor';
 
 const THREAD_REGION_STORAGE_KEY = '[THREAD_REGION]';
 export interface ThreadRegion {
+  id: string;
   title: string;
-  suggestedThreadTypeId: string;
+  suggestedAmount: number;
 }
 @Injectable({ providedIn: 'root' })
 export class ThreadRegionPersistor extends AbstractPersistor<ThreadRegion> {
   constructor(protected storage: Storage) {
-    super(storage, THREAD_REGION_STORAGE_KEY, 'title');
+    super(storage, THREAD_REGION_STORAGE_KEY);
   }
 }

@@ -1,6 +1,11 @@
 <ion-list>
-  <ng-container *ngFor="let entity of entities$ | async">
-    <ng-container *ngTemplateOutlet="entityTemplateRef; context: entity">
+  <ng-container *ngFor="let entityInstance of entities$ | async">
+    <ng-container
+      *ngTemplateOutlet="
+        entityTemplateRef;
+        context: { $implicit: entityInstance }
+      "
+    >
     </ng-container>
   </ng-container>
 </ion-list>

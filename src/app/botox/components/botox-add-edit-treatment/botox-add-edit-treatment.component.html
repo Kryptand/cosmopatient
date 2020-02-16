@@ -17,10 +17,7 @@
   </ion-item>
   <div
     formArrayName="detail"
-    *ngFor="
-      let item of botoxTreatmentForm.get('detail').controls;
-      let i = index
-    "
+    *ngFor="let item of botoxTreatmentForm.get('detail'); let i = index"
   >
     <ion-row [formGroupName]="i">
       <ion-col

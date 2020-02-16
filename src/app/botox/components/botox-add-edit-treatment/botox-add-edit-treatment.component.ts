@@ -117,8 +117,6 @@ export class BotoxAddEditTreatmentComponent implements OnInit {
     const value = itemsAt.value;
     const updatedvalue = { ...value, amount: value.amount - 1 };
     detail.at(index).patchValue(updatedvalue);
-    console.debug(detail.at(index));
-    console.debug(updatedvalue);
   }
 
   private createTreatmentDetail() {

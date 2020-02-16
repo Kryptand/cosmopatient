@@ -11,7 +11,9 @@ export abstract class AbstractPersistor<T> {
   save(entity: any): Observable<any> {
     if (entity) {
       if (this.idProperty === 'id') {
-        entity.id = uuid.v4();
+        if (!entity.id) {
+          entity.id = uuid.v4();
+        }
         return from(
           this.storage.set(`${this.STORAGE_KEY}${entity.id}`, entity)
         );
