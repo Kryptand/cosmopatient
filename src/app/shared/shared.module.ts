@@ -9,7 +9,7 @@ import { CrudContainerComponent } from './crud-container/crud-container.componen
 import { OverlayContainerComponent } from './overlay-container/overlay-container.component';
 import { RepeatComponent } from './repeat/repeat.component';
 import { AutoCompleteComponent } from 'ionic4-auto-complete';
-import { AutocompleteComponent } from './autocomplete/autocomplete.component';
+import { AutocompleteTypeComponent } from './autocomplete/autocomplete-type.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 
@@ -18,7 +18,9 @@ import { MatInputModule } from '@angular/material/input';
     ListWithFabComponent,
     FormComponent,
     CrudContainerComponent,
-    OverlayContainerComponent
+    OverlayContainerComponent,
+    AutocompleteTypeComponent,
+    RepeatComponent
   ],
   exports: [
     ListWithFabComponent,
@@ -33,8 +35,15 @@ import { MatInputModule } from '@angular/material/input';
     IonicModule,
     FormlyModule.forChild({
       types: [
-        { name: 'repeat', component: RepeatComponent },
-        { name: 'autocomplete', component: AutocompleteComponent }
+        {
+          name: 'repeat',
+          component: RepeatComponent,
+          wrappers: null
+        },
+        {
+          name: 'autocomplete',
+          component: AutocompleteTypeComponent
+        }
       ]
     }),
     FormsModule,

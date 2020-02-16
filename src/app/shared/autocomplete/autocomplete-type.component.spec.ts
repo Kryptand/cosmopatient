@@ -1,22 +1,22 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AutocompleteComponent } from './autocomplete.component';
+import { AutocompleteTypeComponent } from './autocomplete-type.component';
 
 describe('AutocompleteComponent', () => {
-  let component: AutocompleteComponent;
-  let fixture: ComponentFixture<AutocompleteComponent>;
+  let component: AutocompleteTypeComponent;
+  let fixture: ComponentFixture<AutocompleteTypeComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AutocompleteComponent ],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      declarations: [AutocompleteTypeComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AutocompleteComponent);
+    fixture = TestBed.createComponent(AutocompleteTypeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

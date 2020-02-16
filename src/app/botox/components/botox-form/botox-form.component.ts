@@ -1,8 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { BotoxTypePersistor } from '../../services/type-persistor.service';
 import { BotoxRegionPersistor } from '../../services/region-persistor.service';
-import { map } from 'rxjs/operators';
+import { map, startWith } from 'rxjs/operators';
+import { FormGroup } from '@angular/forms';
+import { FormlyFormOptions } from '@ngx-formly/core/lib/components/formly.field.config';
+import { FormComponent } from '../../../shared/form/form.component';
 
 @Component({
   selector: 'kryptand-botox-form',
@@ -28,16 +31,6 @@ export class BotoxFormComponent {
         options: this.botoxTypePersistor.list(),
         valueProp: 'id',
         labelProp: 'title'
-      }
-    },
-    {
-      key: 'suggestedAmount',
-      type: 'input',
-      templateOptions: {
-        type: 'number',
-        label: 'Empfohlene Einheiten',
-        placeholder: 'Empfohlene Einheiten',
-        required: true
       }
     },
     {
@@ -67,6 +60,21 @@ export class BotoxFormComponent {
                   return [].concat.apply([], regionTitles);
                 })
               ),
+              hooks: {
+                onInit: field => {
+                  console.debug(field);
+                  this.botoxRegionPersistor.list().subscribe(regions => {
+                    console.debug(regions);
+                    // const sportControl = form.get('');
+                    // field.templateOptions.options = sportControl.valueChanges.pipe(
+                    //   startWith(sportControl.value),
+                    //   map(sportId =>
+                    //     teams.filter(team => team.sportId === sportId)
+                    //   ),
+                    //   tap(() => field.formControl.setValue(null))
+                  });
+                }
+              },
               placeholder: 'Region',
               required: true
             }

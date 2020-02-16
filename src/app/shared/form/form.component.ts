@@ -11,7 +11,7 @@ import { FormlyFieldConfig } from '@ngx-formly/core';
 })
 export class FormComponent extends AbstractEntityAddEditComponent<any> {
   @Input() fields: FormlyFieldConfig[];
-  formGroup: FormGroup = new FormGroup({});
+  @Input() formGroup: FormGroup = new FormGroup({});
   constructor() {
     super();
   }
