@@ -18,7 +18,7 @@ export class CosmoShellComponent {
     this.initializeApp();
   }
 
-  initializeApp() {
+  initializeApp(): void {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();

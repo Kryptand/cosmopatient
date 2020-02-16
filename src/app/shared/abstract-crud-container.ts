@@ -10,10 +10,10 @@ export abstract class AbstractCrudContainer<T> {
   public entities$ = this.refresh$.pipe(switchMap(() => this.persistor.list()));
   constructor(private persistor: AbstractPersistor<T>) {}
 
-  delete(key: string) {
+  delete(key: string): void {
     this.persistor.remove(key).subscribe(_ => this.refreshList());
   }
-  create(entity: T) {
+  create(entity: T): void {
     this.persistor.save(entity).subscribe(_ => this.refreshList());
   }
   async openOverlayWithProps(
@@ -21,7 +21,7 @@ export abstract class AbstractCrudContainer<T> {
     popoverController: PopoverController,
     component: Type<any>,
     currentValue?: any
-  ) {
+  ): Promise<void> {
     const formResult = await openOverlayAndEmitResult(
       overlayProps,
       popoverController,
@@ -30,7 +30,7 @@ export abstract class AbstractCrudContainer<T> {
     return this.handleOverlayResult(formResult, currentValue);
   }
 
-  handleOverlayResult(currentValue: any, originalValue?: any) {
+  handleOverlayResult(currentValue: any, originalValue?: any): void {
     if (
       originalValue &&
       currentValue &&
@@ -41,10 +41,10 @@ export abstract class AbstractCrudContainer<T> {
     }
     this.create(currentValue);
   }
-  update(entity: T) {
+  update(entity: T): void {
     this.persistor.update(entity).subscribe(_ => this.refreshList());
   }
-  private refreshList() {
+  private refreshList(): void {
     this.refresh$.next(undefined);
   }
 }

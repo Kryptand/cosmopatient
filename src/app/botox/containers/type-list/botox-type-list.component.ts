@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AbstractCrudContainer } from '../../../shared/abstract-crud-container';
-import { PopoverController } from '@ionic/angular';
-import { BotoxRegionAddEditContainerComponent } from '../region-add-edit-container/region-add-edit-container.component';
 import {
   BotoxType,
   BotoxTypePersistor
 } from '../../services/type-persistor.service';
+import { OverlayContainerComponent } from '../../../shared/overlay-container/overlay-container.component';
+import { PopoverController } from '@ionic/angular';
 
 @Component({
   selector: 'kryptand-botox-type-list',
@@ -21,10 +21,31 @@ export class BotoxTypeListComponent extends AbstractCrudContainer<BotoxType> {
     super(typePersistor);
   }
   public async openOverlay(type?: BotoxType) {
+    const fields = [
+      {
+        key: 'title',
+        type: 'input',
+        templateOptions: {
+          label: 'Name/ Hersteller',
+          placeholder: 'Name/ Hersteller',
+          required: true
+        }
+      },
+      {
+        key: 'pricePerUnit',
+        type: 'input',
+        templateOptions: {
+          type: 'number',
+          label: 'Preis pro Einheit',
+          placeholder: 'Preis pro Einheit',
+          required: true
+        }
+      }
+    ];
     return this.openOverlayWithProps(
-      { entity: type },
+      { entity: type, fields },
       this.popoverController,
-      BotoxRegionAddEditContainerComponent,
+      OverlayContainerComponent,
       type
     );
   }

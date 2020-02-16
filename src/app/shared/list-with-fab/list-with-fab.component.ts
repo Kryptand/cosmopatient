@@ -17,5 +17,5 @@ import { Observable } from 'rxjs';
 export class ListWithFabComponent {
   @Input() entities$: Observable<any[]>;
   @Input() entityTemplateRef: TemplateRef<any>;
-  @Output() fabButtonPressed: EventEmitter<any>;
+  @Output() fabButtonPressed: EventEmitter<void> = new EventEmitter<void>();
 }

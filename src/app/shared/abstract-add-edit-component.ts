@@ -4,16 +4,11 @@ import { patchFormValue } from '../util/patch-form';
 
 export abstract class AbstractEntityAddEditComponent<T> {
   @Input()
-  entity: T;
-  @Output() saveEntityEmitted: EventEmitter<T> = new EventEmitter();
+  entity: T | any = {};
+  @Output() saveEntity: EventEmitter<T> = new EventEmitter();
+  @Output() cancel: EventEmitter<void> = new EventEmitter<void>();
   public abstract formGroup: FormGroup;
-  public ngOnInit() {
-    if (!this.entity) {
-      return;
-    }
-    patchFormValue(this.entity, this.formGroup);
-  }
   public save() {
-    this.saveEntityEmitted.emit(this.formGroup.value);
+    this.saveEntity.emit(this.formGroup.value);
   }
 }
