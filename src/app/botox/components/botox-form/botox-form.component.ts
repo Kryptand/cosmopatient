@@ -62,16 +62,8 @@ export class BotoxFormComponent {
               ),
               hooks: {
                 onInit: field => {
-                  console.debug(field);
                   this.botoxRegionPersistor.list().subscribe(regions => {
                     console.debug(regions);
-                    // const sportControl = form.get('');
-                    // field.templateOptions.options = sportControl.valueChanges.pipe(
-                    //   startWith(sportControl.value),
-                    //   map(sportId =>
-                    //     teams.filter(team => team.sportId === sportId)
-                    //   ),
-                    //   tap(() => field.formControl.setValue(null))
                   });
                 }
               },
@@ -92,8 +84,14 @@ export class BotoxFormComponent {
       }
     }
   ];
+
   constructor(
-    private botoxTypePersistor: BotoxTypePersistor,
-    private botoxRegionPersistor: BotoxRegionPersistor
-  ) {}
+      private botoxTypePersistor: BotoxTypePersistor,
+      private botoxRegionPersistor: BotoxRegionPersistor
+  ) {
+  }
+
+  save($event: any) {
+    console.debug($event);
+  }
 }

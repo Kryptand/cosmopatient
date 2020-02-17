@@ -1,1 +1,1 @@
-<kryptand-form #form [fields]="fieldConfig"></kryptand-form>
+<kryptand-form [entity]="entity" #form (saveEntity)="save($event)" [fields]="fieldConfig"></kryptand-form>
