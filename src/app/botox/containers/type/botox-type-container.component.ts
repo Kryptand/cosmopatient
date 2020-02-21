@@ -33,7 +33,8 @@ export class BotoxTypeContainerComponent {
       type: 'input',
       templateOptions: {
         type: 'hidden'
-      }
+      },
+      className: 'hidden'
     }
   ];
   constructor(public botoxTypePersistor: BotoxTypePersistor) {}

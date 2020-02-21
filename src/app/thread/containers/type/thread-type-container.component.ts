@@ -33,7 +33,8 @@ export class ThreadTypeContainerComponent {
       type: 'input',
       templateOptions: {
         type: 'hidden'
-      }
+      },
+      className: 'hidden'
     }
   ];
   constructor(public threadTypePersistor: ThreadRegionPersistor) {}

@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { AbstractPersistor } from '../../util/abstract-persistor';
+import {AbstractPersistor} from '../../util/abstract-persistor';
+import {AbstractProductType} from '../../shared/abstract-type';
 
 const THREAD_REGION_STORAGE_KEY = '[THREAD_REGION]';
-export interface ThreadRegion {
-  id: string;
-  title: string;
-  suggestedAmount: number;
+
+export interface ThreadRegion extends AbstractProductType {
+    id: string;
 }
 @Injectable({ providedIn: 'root' })
 export class ThreadRegionPersistor extends AbstractPersistor<ThreadRegion> {

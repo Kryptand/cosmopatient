@@ -1,11 +1,5 @@
-import {
-  AfterViewInit,
-  Component,
-  ComponentRef,
-  OnInit,
-  ViewChild
-} from '@angular/core';
-import { AbstractOverlayContainer } from '../abstract-overlay-container';
+import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {AbstractOverlayContainer} from '../abstract-overlay-container';
 import { NavParams } from '@ionic/angular';
 import { FormComponent } from '../form/form.component';
 

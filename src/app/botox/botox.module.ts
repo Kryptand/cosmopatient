@@ -26,6 +26,7 @@ import { BotoxFormComponent } from './components/botox-form/botox-form.component
     BotoxFormComponent,
     FormComponentContainer
   ],
+  exports: [BotoxFormComponent],
   providers: [Overlay],
   imports: [
     IonicModule,

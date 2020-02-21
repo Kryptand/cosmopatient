@@ -22,7 +22,8 @@ import { PatientAddEditTreatmentContainerComponent } from './container/patient-a
 import { NullOrUndefinedPipe } from './pipes/null-or-undefined.pipe';
 import { Camera } from '@ionic-native/camera/ngx';
 import { ImportExportService } from './services/export-import.service';
-import { PhotoSelector } from './services/photo-selector.service';
+import {PhotoSelector} from './services/photo-selector.service';
+import {BotoxModule} from '../botox/botox.module';
 
 const PATIENT_COMPONENTS = [
   PatientListComponent,
@@ -43,11 +44,12 @@ const PATIENT_COMPONENTS = [
     IonicModule,
     CommonModule,
     AutofocusFixModule,
+    BotoxModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild([
-      { path: '', component: PatientsPage },
-      { path: 'treatments/:id', component: PatientImageGalleryComponent }
+      {path: '', component: PatientsPage},
+      {path: 'treatments/:id', component: PatientImageGalleryComponent}
     ])
   ],
   providers: [

@@ -29,11 +29,12 @@ export class BotoxRegionContainerComponent {
       }
     },
     {
-      key: 'id',
-      type: 'input',
-      templateOptions: {
-        type: 'hidden'
-      }
+        key: 'id',
+        type: 'input',
+        templateOptions: {
+            type: 'hidden'
+        },
+        className: 'hidden'
     }
   ];
   constructor(public botoxRegionPersistor: BotoxRegionPersistor) {}

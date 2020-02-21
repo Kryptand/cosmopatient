@@ -10,12 +10,15 @@
   </ion-segment-button>
 </ion-segment>
 <ion-card *ngIf="botoxActive">
-  <kryptand-patient-add-edit-treatment
-    [treatment]="treatment"
-    (saveTreatmentEventTriggered)="saveTreatmentEventEmitted($event)"
-  ></kryptand-patient-add-edit-treatment>
+  <kryptand-botox-form></kryptand-botox-form
+  >
 </ion-card>
 <ion-card *ngIf="threadActive">
   thread
 </ion-card>
-<ion-card *ngIf="customActive">custom </ion-card>
+<ion-card *ngIf="customActive">
+  <kryptand-patient-add-edit-treatment
+          [treatment]="treatment"
+          (saveTreatmentEventTriggered)="saveTreatmentEventEmitted($event)"
+  ></kryptand-patient-add-edit-treatment>
+</ion-card>

@@ -8,7 +8,7 @@ import { ThreadRegionPersistor } from '../../services/region-persistor.service';
   styleUrls: ['./thread-region-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ThreadRegionContainerComponent{
+export class ThreadRegionContainerComponent {
   public fieldConfig = [
     {
       key: 'title',
@@ -34,7 +34,8 @@ export class ThreadRegionContainerComponent{
       type: 'input',
       templateOptions: {
         type: 'hidden'
-      }
+      },
+      className: 'hidden'
     }
   ];
   constructor(public threadRegionPersistor: ThreadRegionPersistor) {}
