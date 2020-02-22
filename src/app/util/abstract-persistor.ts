@@ -9,6 +9,7 @@ export abstract class AbstractPersistor<T> {
     protected idProperty: string = 'id'
   ) {}
   save(entity: any): Observable<any> {
+    console.debug(entity);
     if (entity) {
       if (this.idProperty === 'id') {
         if (!entity.id) {
@@ -48,6 +49,7 @@ export abstract class AbstractPersistor<T> {
     let values: T[] = [];
     for (const key of keys) {
       const contains = key.startsWith(this.STORAGE_KEY);
+      console.debug(this.STORAGE_KEY);
       if (contains) {
         const value = await this.storage.get(key);
         if (!isNullOrUndefined(value)) {

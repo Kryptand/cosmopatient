@@ -1,28 +1,32 @@
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
-  Component
+  Component,
+  OnInit
 } from '@angular/core';
-import {FormlyFieldConfig} from '@ngx-formly/core';
-import {BotoxTypePersistor} from '../../services/type-persistor.service';
-import {BotoxRegionPersistor} from '../../services/region-persistor.service';
-import {map} from 'rxjs/operators';
-import {BotoxTreatment} from '../../models/botox-treatment';
 import {AbstractTreatmentForm} from '../../../shared/abstract-treatment';
+import {BotoxTreatment} from '../../../botox/models/botox-treatment';
+import {BotoxTypePersistor} from '../../../botox/services/type-persistor.service';
+import {BotoxRegionPersistor} from '../../../botox/services/region-persistor.service';
+import {FormlyFieldConfig} from '@ngx-formly/core';
+import {map} from 'rxjs/operators';
+import {ThreadTypePersistor} from '../../services/type-persistor.service';
+import {ThreadTreatment} from '../../../patients/models/thread-treatment';
+import {ThreadRegionPersistor} from '../../services/region-persistor.service';
 
 @Component({
-  selector: 'kryptand-botox-form',
-  templateUrl: './botox-form.component.html',
-  styleUrls: ['./botox-form.component.scss'],
+  selector: 'kryptand-thread-form',
+  templateUrl: './thread-form.component.html',
+  styleUrls: ['./thread-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BotoxFormComponent extends AbstractTreatmentForm<BotoxTreatment> {
+export class ThreadFormComponent extends AbstractTreatmentForm<ThreadTreatment> {
   constructor(
-      protected botoxTypePersistor: BotoxTypePersistor,
-      protected botoxRegionPersistor: BotoxRegionPersistor,
+      protected threadTypePersistor: ThreadTypePersistor,
+      protected threadRegionPersistor: ThreadRegionPersistor,
       protected cd: ChangeDetectorRef
   ) {
-    super(botoxTypePersistor, botoxRegionPersistor, cd);
+    super(threadTypePersistor, threadRegionPersistor, cd);
   }
 
   fieldConfig: FormlyFieldConfig[] = [
@@ -34,7 +38,7 @@ export class BotoxFormComponent extends AbstractTreatmentForm<BotoxTreatment> {
         placeholder: 'Titel',
         required: true
       },
-      defaultValue: 'Botoxbehandlung'
+      defaultValue: 'Fadenbehandlung'
     },
     {
       key: 'date',
@@ -51,7 +55,7 @@ export class BotoxFormComponent extends AbstractTreatmentForm<BotoxTreatment> {
       type: 'select',
       templateOptions: {
         label: 'Typ',
-        options: this.botoxTypePersistor.list(),
+        options: this.threadTypePersistor.list(),
         valueProp: 'id',
         labelProp: 'title'
       }
@@ -82,7 +86,7 @@ export class BotoxFormComponent extends AbstractTreatmentForm<BotoxTreatment> {
                 autocomplete: 'off'
               },
               label: 'Region',
-              options: this.botoxRegionPersistor.list().pipe(
+              options: this.threadRegionPersistor.list().pipe(
                   map(regions => {
                     const regionTitles = regions.map(region => region.title);
                     return [].concat.apply([], regionTitles);

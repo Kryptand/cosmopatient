@@ -1,5 +1,5 @@
-<ion-segment (ionChange)="segmentChanged($event)">
-  <ion-segment-button checked value="botox">
+<ion-segment value="botox" (ionChange)="segmentChanged($event)">
+  <ion-segment-button value="botox">
     <ion-label>Botox</ion-label>
   </ion-segment-button>
   <ion-segment-button value="threads">
@@ -10,11 +10,14 @@
   </ion-segment-button>
 </ion-segment>
 <ion-card *ngIf="botoxActive">
-  <kryptand-botox-form></kryptand-botox-form
-  >
+  <ng-container *ngIf="botoxComponent">
+    <ng-template [ngComponentOutlet]="botoxComponent | async"></ng-template>
+  </ng-container>
 </ion-card>
 <ion-card *ngIf="threadActive">
-  thread
+  <ng-container *ngIf="threadComponent">
+    <ng-template [ngComponentOutlet]="threadComponent | async"></ng-template>
+  </ng-container>
 </ion-card>
 <ion-card *ngIf="customActive">
   <kryptand-patient-add-edit-treatment

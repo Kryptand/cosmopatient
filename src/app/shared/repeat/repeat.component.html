@@ -1,13 +1,18 @@
-<div *ngFor="let field of field.fieldGroup; let i = index" class="row">
-  <formly-field class="col" [field]="field"></formly-field>
-  <div class="col-sm-2 d-flex align-items-center">
-    <ion-button (click)="remove(i)">
-      <ion-icon slot="icon-only" name="remove-circle-outline"></ion-icon>
+<ng-container *ngIf="field.fieldGroup.length">
+    <div class="row flex" *ngFor="let field of field.fieldGroup; let i = index">
+        <ion-button (click)="remove(i)">
+            <ion-icon slot="icon-only" name="remove-circle-outline"></ion-icon>
+        </ion-button>
+        <formly-field class="col" [field]="field"></formly-field>
+        <ng-container *ngTemplateOutlet="addButton"></ng-container>
+    </div>
+</ng-container>
+<ng-container *ngIf="!field.fieldGroup.length">
+    <ng-container *ngTemplateOutlet="addButton"></ng-container>
+</ng-container>
+
+<ng-template #addButton>
+    <ion-button (click)="add()">
+        <ion-icon slot="icon-only" name="add-circle-outline"></ion-icon>
     </ion-button>
-  </div>
-</div>
-<div style="margin:30px 0;">
-  <ion-button (click)="add()">
-    <ion-icon slot="icon-only" name="add-circle-outline"></ion-icon>
-  </ion-button>
-</div>
+</ng-template>

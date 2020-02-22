@@ -8,15 +8,20 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { Overlay } from '@angular/cdk/overlay';
 import { ThreadRegionContainerComponent } from './containers/region/thread-region-container.component';
-import { ThreadTypeContainerComponent } from './containers/type/thread-type-container.component';
+import {ThreadTypeContainerComponent} from './containers/type/thread-type-container.component';
+import {ThreadFormComponent} from './components/thread-form/thread-form.component';
 
 @NgModule({
-  declarations: [ThreadRegionContainerComponent, ThreadTypeContainerComponent],
+  declarations: [
+    ThreadRegionContainerComponent,
+    ThreadTypeContainerComponent,
+    ThreadFormComponent
+  ],
+  exports: [ThreadFormComponent],
   providers: [Overlay],
   imports: [
     IonicModule,
     CommonModule,
-
     SharedModule,
     MatAutocompleteModule,
     MatInputModule,

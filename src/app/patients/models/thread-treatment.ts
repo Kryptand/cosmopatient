@@ -1,7 +1,7 @@
 import {Treatment} from './treatment';
-import {ThreadTreatmentDetail} from './thread-treatment-detail';
+import {TreatmentDetail} from './treatment-detail';
 
 export interface ThreadTreatment extends Treatment {
-    type: 'Thread';
-    detail: ThreadTreatmentDetail[];
+  type: 'Thread';
+  detail: TreatmentDetail[];
 }

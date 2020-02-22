@@ -12,18 +12,20 @@ import { PatientImageComponent } from './components/patient-image/patient-image.
 import { IonicModule } from '@ionic/angular';
 import { PatientPersistor } from './services/patient-persistor.service';
 
-import { TreatmentPersistor } from './services/patient-treatment-persistor.service';
-import { AutofocusFixModule } from 'ngx-autofocus-fix';
-import { PhotoPersistor } from './services/patient-photo-persistor.service';
-import { PatientImageContainerComponent } from './container/patient-image-container/patient-image-container.component';
-import { PatientAddEditTreatmentComponent } from './components/patient-add-edit-treatment/patient-add-edit-treatment.component';
-import { PatientTreatmentComponent } from './components/patient-treatment/patient-treatment.component';
-import { PatientAddEditTreatmentContainerComponent } from './container/patient-add-edit-treatment-container/patient-add-edit-treatment-container.component';
-import { NullOrUndefinedPipe } from './pipes/null-or-undefined.pipe';
-import { Camera } from '@ionic-native/camera/ngx';
-import { ImportExportService } from './services/export-import.service';
+import {TreatmentPersistor} from './services/patient-treatment-persistor.service';
+import {AutofocusFixModule} from 'ngx-autofocus-fix';
+import {PhotoPersistor} from './services/patient-photo-persistor.service';
+import {PatientImageContainerComponent} from './container/patient-image-container/patient-image-container.component';
+import {PatientAddEditTreatmentComponent} from './components/patient-add-edit-treatment/patient-add-edit-treatment.component';
+import {PatientTreatmentComponent} from './components/patient-treatment/patient-treatment.component';
+import {PatientAddEditTreatmentContainerComponent} from './container/patient-add-edit-treatment-container/patient-add-edit-treatment-container.component';
+import {NullOrUndefinedPipe} from './pipes/null-or-undefined.pipe';
+import {Camera} from '@ionic-native/camera/ngx';
+import {ImportExportService} from './services/export-import.service';
 import {PhotoSelector} from './services/photo-selector.service';
 import {BotoxModule} from '../botox/botox.module';
+import {ThreadModule} from '../thread/thread.module';
+import {SharedModule} from '../shared/shared.module';
 
 const PATIENT_COMPONENTS = [
   PatientListComponent,
@@ -44,13 +46,13 @@ const PATIENT_COMPONENTS = [
     IonicModule,
     CommonModule,
     AutofocusFixModule,
-    BotoxModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild([
       {path: '', component: PatientsPage},
       {path: 'treatments/:id', component: PatientImageGalleryComponent}
-    ])
+    ]),
+    SharedModule
   ],
   providers: [
     PatientPersistor,

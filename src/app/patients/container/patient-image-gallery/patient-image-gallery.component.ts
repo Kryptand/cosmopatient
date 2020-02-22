@@ -60,12 +60,13 @@ export class PatientImageGalleryComponent implements OnInit {
   }
   async openOverlay(treatment?: Treatment) {
     const popover = await this.popoverController.create({
-      component: PatientAddEditTreatmentContainerComponent,
-      componentProps: {
-        patientId: this.patientId,
-        treatment: treatment,
-        popover: this.popoverController
-      }
+        cssClass: 'full-width-overlay',
+        component: PatientAddEditTreatmentContainerComponent,
+        componentProps: {
+            patientId: this.patientId,
+            treatment: treatment,
+            popover: this.popoverController
+        }
     });
     await popover.present();
     const result = await popover.onDidDismiss();

@@ -1,6 +1,5 @@
 import { EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { patchFormValue } from '../util/patch-form';
 
 export abstract class AbstractEntityAddEditComponent<T> {
   @Input()

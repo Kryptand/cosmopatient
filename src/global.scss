@@ -34,3 +34,37 @@
 .hidden {
   display: none;
 }
+
+.full-width-overlay {
+  .popover-content {
+    --width: 90vw !important;
+    --height: 80vh !important;
+  }
+}
+
+.botox-form__region_and_amount {
+  formly-group {
+    display: flex;
+  }
+
+  formly-field.region,
+  formly-field.amount {
+    width: 50%;
+    display: block;
+  }
+}
+
+.flex {
+  display: flex;
+}
+
+.row {
+  .col {
+    display: flex;
+    width: 100%;
+
+    formly-group {
+      width: 100%;
+    }
+  }
+}

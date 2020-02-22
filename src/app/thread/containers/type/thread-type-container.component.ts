@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { ThreadRegionPersistor } from '../../services/region-persistor.service';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {ThreadTypePersistor} from '../../services/type-persistor.service';
 
 @Component({
   selector: 'kryptand-type',
@@ -37,5 +37,7 @@ export class ThreadTypeContainerComponent {
       className: 'hidden'
     }
   ];
-  constructor(public threadTypePersistor: ThreadRegionPersistor) {}
+
+  constructor(public threadTypePersistor: ThreadTypePersistor) {
+  }
 }
