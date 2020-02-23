@@ -1,36 +1,37 @@
 import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  OnInit
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    OnInit,
+    ViewChild
 } from '@angular/core';
 import {AbstractTreatmentForm} from '../../../shared/abstract-treatment';
-import {BotoxTreatment} from '../../../botox/models/botox-treatment';
-import {BotoxTypePersistor} from '../../../botox/services/type-persistor.service';
-import {BotoxRegionPersistor} from '../../../botox/services/region-persistor.service';
 import {FormlyFieldConfig} from '@ngx-formly/core';
 import {map} from 'rxjs/operators';
 import {ThreadTypePersistor} from '../../services/type-persistor.service';
 import {ThreadTreatment} from '../../../patients/models/thread-treatment';
 import {ThreadRegionPersistor} from '../../services/region-persistor.service';
+import {FormComponent} from '../../../shared/form/form.component';
 
 @Component({
-  selector: 'kryptand-thread-form',
-  templateUrl: './thread-form.component.html',
-  styleUrls: ['./thread-form.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'kryptand-thread-form',
+    templateUrl: './thread-form.component.html',
+    styleUrls: ['./thread-form.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ThreadFormComponent extends AbstractTreatmentForm<ThreadTreatment> {
-  constructor(
-      protected threadTypePersistor: ThreadTypePersistor,
-      protected threadRegionPersistor: ThreadRegionPersistor,
-      protected cd: ChangeDetectorRef
-  ) {
-    super(threadTypePersistor, threadRegionPersistor, cd);
-  }
+    @ViewChild('form') formComponent: FormComponent;
 
-  fieldConfig: FormlyFieldConfig[] = [
-    {
+    constructor(
+        protected threadTypePersistor: ThreadTypePersistor,
+        protected threadRegionPersistor: ThreadRegionPersistor,
+        protected cd: ChangeDetectorRef
+    ) {
+        super(threadTypePersistor, threadRegionPersistor, cd);
+    }
+
+    fieldConfig: FormlyFieldConfig[] = [
+        {
       key: 'title',
       type: 'input',
       templateOptions: {
@@ -88,8 +89,8 @@ export class ThreadFormComponent extends AbstractTreatmentForm<ThreadTreatment> 
               label: 'Region',
               options: this.threadRegionPersistor.list().pipe(
                   map(regions => {
-                    const regionTitles = regions.map(region => region.title);
-                    return [].concat.apply([], regionTitles);
+                      const regionTitles = regions.map(region => region.title);
+                      return [].concat.apply([], regionTitles);
                   })
               ),
               placeholder: 'Region',

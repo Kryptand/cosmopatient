@@ -7,7 +7,7 @@ import {Subscription} from 'rxjs';
 import {FormlyFieldConfig} from '@ngx-formly/core';
 import {AbstractPersistor} from '../util/abstract-persistor';
 
-function updateAmountAndPrice(
+const updateAmountAndPrice = (
     v,
     formGroup: FormGroup,
     pricePerUnit: number,
@@ -15,7 +15,7 @@ function updateAmountAndPrice(
     cd: ChangeDetectorRef,
     regionProperty = 'region',
     amountProperty = 'amount'
-) {
+) => {
     const detailArr = formGroup.controls.detail as FormArray;
     let medicineAmount = 0;
     v.detail.forEach((detailEntry, idx, arr) => {
@@ -30,9 +30,10 @@ function updateAmountAndPrice(
         const foundRegion = regions.find(
             listedRegion => listedRegion.title === region.value
         );
-        if (foundRegion) {
-            setTimeout(() => amount.patchValue(foundRegion.suggestedAmount), 0);
+        if (!foundRegion) {
+            return;
         }
+        setTimeout(() => amount.patchValue(foundRegion.suggestedAmount), 0);
     });
     const price = formGroup.get('price');
     if (pricePerUnit) {
@@ -42,10 +43,10 @@ function updateAmountAndPrice(
         price.patchValue(total);
         cd.markForCheck();
     }
-}
+};
 
 export abstract class AbstractTreatmentForm<T> extends AbstractEntityAddEditComponent<T> implements AfterViewInit, OnDestroy, OnInit {
-    @ViewChild('form') formComponent: FormComponent;
+    abstract formComponent: FormComponent;
     selectedProductType: AbstractProductType;
     regions: any[];
 
@@ -59,6 +60,7 @@ export abstract class AbstractTreatmentForm<T> extends AbstractEntityAddEditComp
 
     ngAfterViewInit(): void {
         let previousValue = {};
+        console.debug(this.formComponent);
         this.formSubscription = this.formComponent.formGroup.valueChanges.subscribe(
             v => {
                 if (v.type) {
@@ -92,6 +94,7 @@ export abstract class AbstractTreatmentForm<T> extends AbstractEntityAddEditComp
     }
 
     save() {
+        console.debug(this.formComponent.formGroup);
         this.saveEntity.emit(this.formComponent.formGroup.value);
     }
 

@@ -1,8 +1,10 @@
-import { Photo } from './photo';
+import {Photo} from './photo';
+import {Key} from '../../shared/key-decorator';
 export type TreatmentType = 'Botox' | 'Thread' | 'Custom';
 
-export interface Treatment {
-  id: string;
+export class Treatment {
+  @Key id: string;
+  @Key patientId: string;
   photos: Photo[];
   label?: string;
   type: TreatmentType;

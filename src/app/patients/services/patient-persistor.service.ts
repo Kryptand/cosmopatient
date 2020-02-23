@@ -15,10 +15,10 @@ export class PatientPersistor extends AbstractPersistor<Patient> {
     protected storage: Storage,
     protected treatmentPersistor: TreatmentPersistor
   ) {
-    super(storage, PATIENTS_STORAGE_KEY);
+    super(storage, PATIENTS_STORAGE_KEY, Patient);
   }
   remove(id: string): Observable<any> {
-    this.treatmentPersistor.removeForPatient(id);
+    this.treatmentPersistor.removeForPatient(id).then(r => r);
     return from(this.storage.remove(`${PATIENTS_STORAGE_KEY}${id}`));
   }
 }

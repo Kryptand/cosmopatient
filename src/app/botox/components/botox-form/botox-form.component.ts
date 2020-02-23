@@ -1,7 +1,8 @@
 import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    ViewChild
 } from '@angular/core';
 import {FormlyFieldConfig} from '@ngx-formly/core';
 import {BotoxTypePersistor} from '../../services/type-persistor.service';
@@ -9,19 +10,22 @@ import {BotoxRegionPersistor} from '../../services/region-persistor.service';
 import {map} from 'rxjs/operators';
 import {BotoxTreatment} from '../../models/botox-treatment';
 import {AbstractTreatmentForm} from '../../../shared/abstract-treatment';
+import {FormComponent} from '../../../shared/form/form.component';
 
 @Component({
-  selector: 'kryptand-botox-form',
-  templateUrl: './botox-form.component.html',
-  styleUrls: ['./botox-form.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'kryptand-botox-form',
+    templateUrl: './botox-form.component.html',
+    styleUrls: ['./botox-form.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BotoxFormComponent extends AbstractTreatmentForm<BotoxTreatment> {
-  constructor(
-      protected botoxTypePersistor: BotoxTypePersistor,
-      protected botoxRegionPersistor: BotoxRegionPersistor,
-      protected cd: ChangeDetectorRef
-  ) {
+    @ViewChild('form') formComponent: FormComponent;
+
+    constructor(
+        protected botoxTypePersistor: BotoxTypePersistor,
+        protected botoxRegionPersistor: BotoxRegionPersistor,
+        protected cd: ChangeDetectorRef
+    ) {
     super(botoxTypePersistor, botoxRegionPersistor, cd);
   }
 
@@ -84,8 +88,8 @@ export class BotoxFormComponent extends AbstractTreatmentForm<BotoxTreatment> {
               label: 'Region',
               options: this.botoxRegionPersistor.list().pipe(
                   map(regions => {
-                    const regionTitles = regions.map(region => region.title);
-                    return [].concat.apply([], regionTitles);
+                      const regionTitles = regions.map(region => region.title);
+                      return [].concat.apply([], regionTitles);
                   })
               ),
               placeholder: 'Region',

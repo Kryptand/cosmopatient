@@ -1,4 +1,4 @@
-export interface AbstractProductType {
+export class AbstractProductType {
   title: string;
   pricePerUnit: number;
 }

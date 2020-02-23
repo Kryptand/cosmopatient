@@ -1,37 +1,27 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  Output,
-  EventEmitter,
-  ChangeDetectionStrategy
-} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 import {FormGroup} from '@angular/forms';
-import {FormControl} from '@angular/forms';
 import {Patient} from '../../models/patient';
-import {patchFormValue} from '../../../util/patch-form';
 import {AbstractEntityAddEditComponent} from '../../../shared/abstract-add-edit-component';
 import {FormlyFieldConfig} from '@ngx-formly/core';
-import {map} from 'rxjs/operators';
 
 @Component({
-  selector: 'kryptand-patient-add-edit',
-  templateUrl: './patient-add-edit.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'kryptand-patient-add-edit',
+    templateUrl: './patient-add-edit.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PatientAddEditComponent extends AbstractEntityAddEditComponent<Patient> {
-  formGroup: FormGroup;
-  fieldConfig: FormlyFieldConfig[] = [
-    {
-      key: 'gender',
-      type: 'select',
-      templateOptions: {
-        label: 'Geschlecht',
-        options: [
-          {title: 'Männlich', value: 0},
-          {title: 'Weiblich', value: 1},
-          {title: 'Divers', value: 2}
-        ],
+    formGroup: FormGroup;
+    fieldConfig: FormlyFieldConfig[] = [
+        {
+            key: 'gender',
+            type: 'select',
+            templateOptions: {
+                label: 'Geschlecht',
+                options: [
+                    {title: 'Männlich', value: 0},
+                    {title: 'Weiblich', value: 1},
+                    {title: 'Divers', value: 2}
+                ],
         valueProp: 'title',
         labelProp: 'value'
       }

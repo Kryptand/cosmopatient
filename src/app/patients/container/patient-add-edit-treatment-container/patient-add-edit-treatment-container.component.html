@@ -11,17 +11,25 @@
 </ion-segment>
 <ion-card *ngIf="botoxActive">
   <ng-container *ngIf="botoxComponent">
-    <ng-template [ngComponentOutlet]="botoxComponent | async"></ng-template>
+      <ng-template
+              [lazyComp]="botoxComponent | async"
+              [inputs]="treatmentInput"
+              [outputs]="treatmentOutputs"
+      ></ng-template>
   </ng-container>
 </ion-card>
 <ion-card *ngIf="threadActive">
-  <ng-container *ngIf="threadComponent">
-    <ng-template [ngComponentOutlet]="threadComponent | async"></ng-template>
-  </ng-container>
+    <ng-container *ngIf="threadComponent">
+        <ng-template
+                [lazyComp]="threadComponent | async"
+                [inputs]="treatmentInput"
+                [outputs]="treatmentOutputs"
+        ></ng-template>
+    </ng-container>
 </ion-card>
 <ion-card *ngIf="customActive">
-  <kryptand-patient-add-edit-treatment
-          [treatment]="treatment"
-          (saveTreatmentEventTriggered)="saveTreatmentEventEmitted($event)"
-  ></kryptand-patient-add-edit-treatment>
+    <kryptand-patient-add-edit-treatment
+            [treatment]="treatment"
+            (saveTreatmentEventTriggered)="saveTreatmentEventEmitted($event)"
+    ></kryptand-patient-add-edit-treatment>
 </ion-card>

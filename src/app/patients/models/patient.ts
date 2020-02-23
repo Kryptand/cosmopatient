@@ -4,7 +4,7 @@ export enum Gender {
   Female,
   Diverse
 }
-export interface Patient {
+export class Patient {
   id: string;
   gender: Gender;
   firstName: string;
@@ -14,5 +14,4 @@ export interface Patient {
   city: string;
   zipCode: string;
   birthday: Date;
-  treatments: Treatment[];
 }

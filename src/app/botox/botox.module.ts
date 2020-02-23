@@ -1,6 +1,3 @@
-import { BotoxAddEditTreatmentComponent } from './components/botox-add-edit-treatment/botox-add-edit-treatment.component';
-import { IonicModule } from '@ionic/angular';
-import { BotoxAddEditTreatmentContainerComponent } from './containers/botox-add-edit-treatment-container/botox-add-edit-treatment-container.component';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { BotoxPricePerAmountComponent } from './containers/price-per-amount/price-per-amount.component';
@@ -14,12 +11,11 @@ import { BotoxRegionContainerComponent } from './containers/region/botox-region-
 import { RouterModule } from '@angular/router';
 import { FormComponentContainer } from './containers/form/form.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { BotoxFormComponent } from './components/botox-form/botox-form.component';
+import {BotoxFormComponent} from './components/botox-form/botox-form.component';
+import {IonicModule} from '@ionic/angular';
 
 @NgModule({
   declarations: [
-    BotoxAddEditTreatmentComponent,
-    BotoxAddEditTreatmentContainerComponent,
     BotoxPricePerAmountComponent,
     BotoxTypeContainerComponent,
     BotoxRegionContainerComponent,
