@@ -40,7 +40,7 @@ export class PatientImageGalleryComponent implements OnInit {
       return;
     }
     const treatments$ = this.refresh$.pipe(
-      switchMap(() => this.treatmentPersistor.list(this.patientId))
+      switchMap(() => this.treatmentPersistor.listForPatient(this.patientId))
     );
     treatments$.subscribe(values => {
       this.treatments$ = of(values.filter((value: any) => value));
@@ -48,8 +48,8 @@ export class PatientImageGalleryComponent implements OnInit {
     });
   }
   delete(treatment: Treatment) {
-    this.treatmentPersistor
-      .remove(this.patientId, treatment.id)
+      this.treatmentPersistor
+          .remove(treatment)
       .subscribe(_ => this.refresh$.next(undefined));
   }
   edit(treatment: Treatment) {
@@ -73,10 +73,10 @@ export class PatientImageGalleryComponent implements OnInit {
     const toSave = result.data as Treatment;
     return treatment
       ? this.treatmentPersistor
-          .save(this.patientId, toSave)
+            .save(toSave)
           .subscribe(_ => this.refresh$.next(undefined))
       : this.treatmentPersistor
-          .update(this.patientId, toSave)
+            .update(toSave)
           .subscribe(_ => this.refresh$.next(undefined));
   }
 }

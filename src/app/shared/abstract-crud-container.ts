@@ -37,11 +37,7 @@ export abstract class AbstractCrudContainer<T> {
     component: Type<any>,
     currentValue?: any
   ): Promise<void> {
-    const formResult = await openOverlayAndEmitResult(
-      overlayProps,
-      popoverController,
-      component
-    );
+    const formResult = await openOverlayAndEmitResult(popoverController, component, overlayProps);
     return this.handleOverlayResult(formResult, currentValue);
   }
 

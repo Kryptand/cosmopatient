@@ -2,7 +2,7 @@ import { ModalController, ToastController } from '@ionic/angular';
 import { PatientImageComparisonComponent } from '../patients/components/patient-image-comparison/patient-image-comparison.component';
 import { CameraOptions } from '@ionic-native/camera/ngx';
 
-import { Camera } from '@ionic-native/camera/ngx';
+import {Camera} from '@ionic-native/camera/ngx';
 import {Photo} from '../patients/models/photo';
 export const createPictureComparisonToast = async (
   photos: Photo[],
@@ -69,7 +69,6 @@ export const getBase64ImageFromCamera = async (camera: Camera) => {
   return photoFromBase64String(base64Image);
 };
 export const photoFromBase64String = (imagestring: string): Photo => ({
-  id: '',
   content: imagestring,
   fileName: 'uploadedImage',
   createdAt: Date.now().toString()

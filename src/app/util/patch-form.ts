@@ -1,15 +1,24 @@
-import { FormGroup } from '@angular/forms';
+import {FormGroup} from '@angular/forms';
 
-export const patchFormValue = (valueObject: any, formGroup: FormGroup) => {
-  if (!valueObject) {
-    throw new Error('no ValueObject provided');
-  }
-  if (!formGroup) {
-    throw new Error('no FormGroup provided');
-  }
-  Object.keys(valueObject).map(key => {
-    if (valueObject[key]) {
-      formGroup.controls[key].patchValue(valueObject[key]);
+export const NO_VALUEOBJECT_ERROR = 'no ValueObject provided';
+export const NO_FORM_GROUP_ERROR = 'no FormGroup provided';
+
+export const patchFormValue = (valueObject: Object, formGroup: FormGroup) => {
+    if (
+        !valueObject ||
+        (typeof valueObject !== 'object' || Array.isArray(valueObject))
+    ) {
+        throw new Error(NO_VALUEOBJECT_ERROR);
     }
-  });
+    if (
+        !formGroup ||
+        (typeof formGroup !== 'object' || Array.isArray(formGroup))
+    ) {
+        throw new Error(NO_FORM_GROUP_ERROR);
+    }
+    Object.keys(valueObject).map(key => {
+        if (valueObject[key]) {
+            formGroup.controls[key].patchValue(valueObject[key]);
+        }
+    });
 };

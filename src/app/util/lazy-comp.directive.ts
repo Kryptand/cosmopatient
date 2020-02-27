@@ -41,7 +41,6 @@ export class LazyCompDirective {
     private refreshInputs(inputs) {
         Object.keys(inputs).forEach(inputName => this.compRef.instance[inputName] = inputs[inputName]);
     }
-
     ngOnDestroy() {
         this.compRef = null;
         this.subscription.unsubscribe();

@@ -1,11 +1,7 @@
-import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import {PatientsPage} from './patients.page';
-import {PatientListComponent} from './container/patient-list/patient-list.component';
-import {PatientAddEditComponent} from './components/patient-add-edit/patient-add-edit.component';
-import {PatientAddEditContainerComponent} from './container/patient-add-edit-container/patient-add-edit-container.component';
+import {CommonModule} from '@angular/common';
+import {NgModule} from '@angular/core';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {RouterModule} from '@angular/router';
 import {PatientImageComparisonComponent} from './components/patient-image-comparison/patient-image-comparison.component';
 import {PatientImageGalleryComponent} from './container/patient-image-gallery/patient-image-gallery.component';
 import {PatientImageComponent} from './components/patient-image/patient-image.component';
@@ -25,11 +21,9 @@ import {ImportExportService} from './services/export-import.service';
 import {PhotoSelector} from './services/photo-selector.service';
 import {SharedModule} from '../shared/shared.module';
 import {LazyCompDirective} from '../util/lazy-comp.directive';
+import {PatientListContainer} from './container/patient/patient-list-container.component';
 
 const PATIENT_COMPONENTS = [
-    PatientListComponent,
-    PatientAddEditComponent,
-    PatientAddEditContainerComponent,
     PatientImageComparisonComponent,
     PatientImageContainerComponent,
     PatientAddEditTreatmentComponent,
@@ -43,16 +37,16 @@ const PATIENT_COMPONENTS = [
 
 @NgModule({
   imports: [
-    IonicModule,
-    CommonModule,
-    AutofocusFixModule,
-    FormsModule,
-    ReactiveFormsModule,
-    RouterModule.forChild([
-        {path: '', component: PatientsPage},
-        {path: 'treatments/:id', component: PatientImageGalleryComponent}
-    ]),
-    SharedModule
+      SharedModule,
+      IonicModule,
+      CommonModule,
+      AutofocusFixModule,
+      FormsModule,
+      ReactiveFormsModule,
+      RouterModule.forChild([
+          {path: '', component: PatientListContainer},
+          {path: 'treatments/:id', component: PatientImageGalleryComponent}
+      ])
   ],
   providers: [
     PatientPersistor,
@@ -62,12 +56,6 @@ const PATIENT_COMPONENTS = [
     ImportExportService,
     PhotoSelector
   ],
-  declarations: [PatientsPage, ...PATIENT_COMPONENTS],
-  entryComponents: [
-    PatientAddEditComponent,
-    PatientImageComparisonComponent,
-    PatientAddEditContainerComponent,
-    PatientAddEditTreatmentContainerComponent
-  ]
+    declarations: PATIENT_COMPONENTS
 })
 export class PatientsPageModule {}

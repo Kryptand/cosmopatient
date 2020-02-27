@@ -2,14 +2,19 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/spec",
+    "module": "commonjs",
     "types": [
-      "jasmine",
+      "jest",
+      // 1
       "node"
-    ]
+    ],
+    "esModuleInterop": true,
+    // 2
+    "emitDecoratorMetadata": true
+    // 3
   },
   "files": [
     "src/test.ts",
-    "src/zone-flags.ts",
     "src/polyfills.ts"
   ],
   "include": [

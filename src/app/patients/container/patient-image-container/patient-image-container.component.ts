@@ -11,14 +11,13 @@ import { Camera } from '@ionic-native/camera/ngx';
 import { Platform, ToastController, ModalController } from '@ionic/angular';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { isNullOrUndefined } from 'util';
 import { PhotoPersistor } from '../../services/patient-photo-persistor.service';
 import { PhotoSelector } from '../../services/photo-selector.service';
 import {
-  createPictureComparisonToast,
-  firstFileToBase64,
-  getBase64ImageFromCamera,
-  openComparisonModal
+    createPictureComparisonToast,
+    firstFileToBase64,
+    getBase64ImageFromCamera,
+    openComparisonModal
 } from '../../../util/image';
 import {Photo} from '../../models/photo';
 
@@ -66,14 +65,16 @@ export class PatientImageContainerComponent implements OnInit {
     });
   }
   uploadImage(uploadedImages: FileList) {
-    if (!(uploadedImages && uploadedImages.length > 0)) {
-      return;
-    }
-    firstFileToBase64(uploadedImages[0]).then((result: Photo) =>
-      this.photoPersistor
-        .save(this.patientId, this.treatmentId, result)
-        .subscribe(_ => this.refresh$.next(undefined))
-    );
+      if (!(uploadedImages && uploadedImages.length > 0)) {
+          return;
+      }
+      firstFileToBase64(uploadedImages[0]).then((image: Photo) => {
+          image.patientId = this.patientId;
+          image.treatmentId = this.treatmentId;
+          return this.photoPersistor
+              .save(image)
+              .subscribe(_ => this.refresh$.next(undefined));
+      });
   }
 
   uploadFromCamera() {
@@ -81,9 +82,11 @@ export class PatientImageContainerComponent implements OnInit {
       this.uploadElement.nativeElement.click();
     }
     getBase64ImageFromCamera(this.camera).then(image => {
-      this.photoPersistor
-        .save(this.patientId, this.treatmentId, image)
-        .subscribe(_ => this.refresh$.next(undefined));
+        image.patientId = this.patientId;
+        image.treatmentId = this.treatmentId;
+        this.photoPersistor
+            .save(image)
+            .subscribe(_ => this.refresh$.next(undefined));
     });
   }
 
@@ -127,8 +130,8 @@ export class PatientImageContainerComponent implements OnInit {
         this.selectedPhotos.filter(x => x.id !== photo.id)
       );
     }
-    this.photoPersistor
-      .remove(this.patientId, this.treatmentId, photo)
+      this.photoPersistor
+          .remove(photo)
       .subscribe(_ => this.refresh$.next(undefined));
   }
 }

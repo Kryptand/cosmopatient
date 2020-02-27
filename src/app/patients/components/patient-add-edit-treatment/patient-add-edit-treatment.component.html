@@ -1,14 +1,14 @@
-<form [formGroup]="treatmentForm" padding-right>
-  <ion-item>
-    <ion-label position="floating">Bezeichnung</ion-label>
-    <ion-input
-      autofocus
-      [autofocusFixAsync]="true"
-      [autofocusFixSmartEmptyCheck]="true"
-      [autofocusFixTriggerDetectChanges]="true"
-      type="text"
-      formControlName="label"
-      required
+<form [formGroup]="treatmentForm">
+    <ion-item>
+        <ion-label position="floating">Bezeichnung</ion-label>
+        <ion-input
+                autofocus
+                [autofocusFixAsync]="true"
+                [autofocusFixSmartEmptyCheck]="true"
+                [autofocusFixTriggerDetectChanges]="true"
+                type="text"
+                formControlName="label"
+                required
     ></ion-input>
   </ion-item>
   <ion-item>

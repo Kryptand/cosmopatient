@@ -4,10 +4,18 @@ import {isNullOrUndefined} from 'util';
 import * as uuid from 'uuid';
 import {getKeyNamesFromModel} from '../shared/key-decorator';
 
+export const NO_STORAGE_KEY = 'no Storage key provided';
+export const NO_STORAGE_INSTANCE = 'no Storage instance provided';
 export const getEntriesFromStorageByKeyAsync = async (
     storageKey: string,
     storageInstance: Storage
 ) => {
+  if (!storageKey) {
+    throw new Error(NO_STORAGE_KEY);
+  }
+  if (!storageInstance) {
+    throw new Error(NO_STORAGE_INSTANCE);
+  }
   const keys = await storageInstance.keys();
   let values = [];
   for (const key of keys) {

@@ -1,0 +1,12 @@
+<kryptand-crud-container
+        title="Patienten"
+        [templateRef]="templateRef"
+        [persistorInstance]="patientPersistor"
+        [fieldConfig]="fieldConfig"
+>
+</kryptand-crud-container>
+<ng-template #templateRef let-entity>
+    <ion-item [routerLink]="['/tabs/patients/treatments', entity.id]">
+        <ion-label>{{ entity.firstName }}-{{ entity.lastName }}</ion-label>
+    </ion-item>
+</ng-template>
